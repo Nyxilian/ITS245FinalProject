@@ -12,6 +12,7 @@ namespace FinalProject
 {
     public class Functions
     {
+        // Open Connection with MySql
         public static MySqlConnection ConnectDB()
         {
             string connStr = "server=127.0.0.1;uid=root;pwd=Nyxilian@0908;database=its245final";
@@ -20,6 +21,7 @@ namespace FinalProject
             return conn;
         }
 
+        //Load DataTable with input Query
         public static DataTable LoadTable(string sqlQuery, MySqlConnection conn)
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -39,7 +41,6 @@ namespace FinalProject
             {
                 cmd.Dispose();
             }
-            MessageBox.Show("Unable to retrieve data from DB.");
             return null;
         }
     }
