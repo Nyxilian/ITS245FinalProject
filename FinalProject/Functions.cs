@@ -21,17 +21,15 @@ namespace FinalProject
             return conn;
         }
 
-        //Load DataTable with input Query
-        public static DataTable LoadTable(string sqlQuery, MySqlConnection conn)
+        //Load DataTable with an input Query
+        public static MySqlDataAdapter LoadTable(string sqlQuery, MySqlConnection conn)
         {
             MySqlCommand cmd = new MySqlCommand();
-            DataTable dt = new DataTable();
             try
             {
                 cmd = new MySqlCommand(sqlQuery, conn);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                da.Fill(dt);
-                return dt;
+                return da;
             }
             catch (Exception ex)
             {
