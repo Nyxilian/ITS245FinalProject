@@ -33,22 +33,26 @@
             this.TBSearchPatients = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnToAllergyHistory = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(45, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(531, 366);
+            this.dataGridView1.Size = new System.Drawing.Size(531, 284);
             this.dataGridView1.TabIndex = 0;
             // 
             // btnToPatientDemo
             // 
-            this.btnToPatientDemo.Location = new System.Drawing.Point(621, 340);
+            this.btnToPatientDemo.Location = new System.Drawing.Point(246, 347);
             this.btnToPatientDemo.Name = "btnToPatientDemo";
             this.btnToPatientDemo.Size = new System.Drawing.Size(137, 59);
             this.btnToPatientDemo.TabIndex = 1;
@@ -58,7 +62,7 @@
             // 
             // TBSearchPatients
             // 
-            this.TBSearchPatients.Location = new System.Drawing.Point(619, 197);
+            this.TBSearchPatients.Location = new System.Drawing.Point(615, 107);
             this.TBSearchPatients.Name = "TBSearchPatients";
             this.TBSearchPatients.Size = new System.Drawing.Size(141, 21);
             this.TBSearchPatients.TabIndex = 3;
@@ -66,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(626, 182);
+            this.label2.Location = new System.Drawing.Point(622, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 12);
             this.label2.TabIndex = 4;
@@ -74,7 +78,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(638, 224);
+            this.button1.Location = new System.Drawing.Point(634, 134);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 31);
             this.button1.TabIndex = 5;
@@ -82,11 +86,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnToAllergyHistory
+            // 
+            this.btnToAllergyHistory.Location = new System.Drawing.Point(45, 347);
+            this.btnToAllergyHistory.Name = "btnToAllergyHistory";
+            this.btnToAllergyHistory.Size = new System.Drawing.Size(137, 59);
+            this.btnToAllergyHistory.TabIndex = 6;
+            this.btnToAllergyHistory.Text = "Allergy History";
+            this.btnToAllergyHistory.UseVisualStyleBackColor = true;
+            this.btnToAllergyHistory.Click += new System.EventHandler(this.btnToAllergyHistory_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(439, 347);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(137, 59);
+            this.btnUpdate.TabIndex = 7;
+            this.btnUpdate.Text = "Update Patient List";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // SelectPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnToAllergyHistory);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TBSearchPatients);
@@ -108,6 +134,8 @@
         private System.Windows.Forms.TextBox TBSearchPatients;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnToAllergyHistory;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 

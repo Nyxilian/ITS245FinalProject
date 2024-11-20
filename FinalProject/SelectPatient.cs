@@ -14,11 +14,23 @@ namespace FinalProject
 {
     public partial class SelectPatient : Form
     {
-        MySqlConnection conn;
-        MySqlDataAdapter ad;
+        MySqlConnection conn = new MySqlConnection();
+        MySqlDataAdapter ad = new MySqlDataAdapter();
+        DataTable dt = new DataTable();
+
         public SelectPatient()
         {
             InitializeComponent();
+        }
+        private void UpdateTable()
+        {
+            string query = "SELECT PatientID, PtFirstName, PtLastName, PtHomePhone, DOB " +
+                "FROM its245final.patientdemographics " +
+                "WHERE deleted = 0;";
+
+            ad = Functions.LoadTable(query, conn);
+            ad.Fill(dt);
+            dataGridView1.DataSource = dt;
         }
 
         //2.b.i.2
@@ -27,14 +39,7 @@ namespace FinalProject
         {
             conn = Functions.ConnectDB();
             //2.b.i.3
-            string query = "SELECT PatientID, PtFirstName, PtLastName, PtHomePhone, DOB " +
-                "FROM its245final.patientdemographics " +
-                "WHERE deleted = 0;";
-            DataTable dt = new DataTable();
-
-            ad = Functions.LoadTable(query, conn);
-            ad.Fill(dt);
-            dataGridView1.DataSource = dt;
+            UpdateTable();
             dataGridView1.Columns["PatientID"].Visible = false;
             dataGridView1.Columns["DOB"].Visible = false;
         }
@@ -74,6 +79,18 @@ namespace FinalProject
             {
                 MessageBox.Show("Unable to find a paitent with the corresponding data");
             }
+        }
+
+        private void btnToAllergyHistory_Click(object sender, EventArgs e)
+        {
+            AllergyHistory ah = new AllergyHistory(conn);
+            ah.Show();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            dt.Clear();
+            UpdateTable();
         }
     }
 }

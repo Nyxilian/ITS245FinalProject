@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,10 +38,10 @@ namespace FinalProject
                 btnModify.Enabled = true;
                 btnSave.Enabled = false;
                 btnUndo.Enabled = false;
-                btnDelete.Enabled = true;
+                btnDelete.Enabled = false;
                 
                 dataGridView1.ReadOnly = true; // disabling editing
-                BackColor = Color.LightGray;
+                dataGridView1.BackgroundColor = Color.LightGray;
             }
             else if(m == 1) // Add mode
             {
@@ -53,7 +54,7 @@ namespace FinalProject
                 btnDelete.Enabled = false;
 
                 dataGridView1.ReadOnly = false; // allowing editing
-                BackColor = Color.White;
+                dataGridView1.BackgroundColor = Color.White;
             }
             else // Modify mode
             {
@@ -65,7 +66,7 @@ namespace FinalProject
                 btnDelete.Enabled = true;
 
                 dataGridView1.ReadOnly = false; // allowing editing
-                BackColor = Color.White;
+                dataGridView1.BackgroundColor = Color.White;
             }
         }
 
@@ -126,56 +127,76 @@ namespace FinalProject
             List<string> targetCellValues = new List<string>();
             string query = "";
             string temp = "";
+            DataGridViewRow row = null;
+            
+            // Setting the index of the row looping
+            if (mode == 1) // Add mode only loops the newly added row
+            {
+                row = dataGridView1.Rows[1];
+            }
+            if (mode == 2) // Modify mode only loops the existing row
+            {
+                row = dataGridView1.Rows[0];
+            }
 
             // Add the name of columns and their values into the lists
             // if it has any values
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewCell cell in row.Cells)
             {
-                foreach (DataGridViewCell cell in row.Cells)
+                if (!string.IsNullOrEmpty(cell.Value.ToString()))
                 {
-                    if(!string.IsNullOrEmpty(cell.Value.ToString()))
+                    targetColumnNames.Add($"`{dataGridView1.Columns[cell.ColumnIndex].Name}`");
+                    if (cell.Value is DateTime) // Check if the cell contains a DateTime
                     {
-                        targetColumnNames.Add(dataGridView1.Columns[cell.ColumnIndex].Name);
-                        targetCellValues.Add(cell.Value.ToString());
+                        DateTime dateValue = (DateTime)cell.Value;
+                        targetCellValues.Add($"\'{dateValue.ToString("yyyy/MM/dd")}\'");
+                    }
+                    else if (cell.Value is bool) // Check if the cell contains a boolean
+                    {
+                        bool boolValue = (bool)cell.Value;
+                        int t;
+                        t = boolValue ? 1 : 0;
+                        targetCellValues.Add($"{t}");
+                    }
+                    else
+                    {
+                        targetCellValues.Add($"\'{cell.Value}\'");
                     }
                 }
-                if(mode == 1 && row.Index == 1) // Add mode && Add only the newly added row.
-                { 
-                    temp = string.Join(", ", targetColumnNames);
-                    query = "INSERT INTO its245final.patientdemographics (" + temp + ") " +
-                        "VALUES (";
-                    temp = string.Join(", ", targetCellValues);
-                    query += temp + ");";
-                }
-                if(mode == 2 && row.Index == 0) // Modify mode && Modify only the existing row.
+            }
+            if (mode == 1) // Add mode
+            {
+                temp = string.Join(", ", targetColumnNames);
+                query = "INSERT INTO its245final.patientdemographics (" + temp + ") " +
+                    "VALUES (";
+                temp = string.Join(", ", targetCellValues);
+                query += temp + ");";
+            }
+            if (mode == 2) // Modify mode
+            {
+                query = "UPDATE its245final.patientdemographics " +
+                    "SET ";
+                // no need to be compare the count of another list
+                // because two lists have same size
+                for (int i = 0; i < targetColumnNames.Count; i++)
                 {
-                    query = "UPDATE its245final.patientdemographics " +
-                        "SET ";
-                    // no need to be compare the count of another list
-                    // because two has same size
-                    for (int i = 0; i < targetColumnNames.Count; i++) 
+                    if (i != 0)
                     {
-                        if(i != 0) 
-                        { 
-                            temp += ", "; 
-                        }
-                        temp += targetColumnNames[i] + " = " + targetCellValues[i];
+                        temp += ", ";
                     }
-                    query += $" WHERE PatientID = {pid}";
+                    temp += targetColumnNames[i] + " = " + targetCellValues[i];
                 }
-                // Executing Query
-                try
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                targetColumnNames.Clear();
-                targetCellValues.Clear();
+                query += temp + $" WHERE PatientID = {pid};";
+            }
+            try // Executing Query
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             ModeChange(0); // Returning to View mode
         }
@@ -184,6 +205,15 @@ namespace FinalProject
         {
             dt.Clear();
             ad.Fill(dt);
+            ModeChange(0);
+            if(mode == 1)
+            {
+                btnAdd.Enabled = true;
+            }
+            if(mode == 2)
+            {
+                btnModify.Enabled = true;
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -203,7 +233,7 @@ namespace FinalProject
             // Retrieving data from DB again.
             dt.Clear();
             ad.Fill(dt);
+            ModeChange(0); // Returning to View mode
         }
-
     }
 }

@@ -28,8 +28,8 @@ namespace FinalProject
             try
             {
                 cmd = new MySqlCommand(sqlQuery, conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                return da;
+                MySqlDataAdapter ad = new MySqlDataAdapter(cmd);
+                return ad;
             }
             catch (Exception ex)
             {
