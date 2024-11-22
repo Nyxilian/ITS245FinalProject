@@ -15,7 +15,7 @@ namespace FinalProject
         // Open Connection with MySql
         public static MySqlConnection ConnectDB()
         {
-            string connStr = "server=127.0.0.1;uid=root;pwd=Nyxilian@0908;database=its245final";
+            string connStr = "server=127.0.0.1;uid=root;pwd=toor;database=patientdb";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             return conn;
