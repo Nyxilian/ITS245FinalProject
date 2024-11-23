@@ -104,7 +104,25 @@
     <Compile Include="AllergyHistory.Designer.cs">
       <DependentUpon>AllergyHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Family History.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Family History.Designer.cs">
+      <DependentUpon>Family History.cs</DependentUpon>
+    </Compile>
     <Compile Include="Functions.cs" />
+    <Compile Include="General Medical History.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General Medical History.Designer.cs">
+      <DependentUpon>General Medical History.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="PatientsDemographics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +139,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AllergyHistory.resx">
       <DependentUpon>AllergyHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Family History.resx">
+      <DependentUpon>Family History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General Medical History.resx">
+      <DependentUpon>General Medical History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientsDemographics.resx">
       <DependentUpon>PatientsDemographics.cs</DependentUpon>
