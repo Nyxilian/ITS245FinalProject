@@ -28,7 +28,7 @@ namespace FinalProject
                 "FROM its245final.patientdemographics " +
                 "WHERE deleted = 0;";
 
-            ad = Functions.LoadTable(query, conn);
+            Datatable.ad = LoadTable(query, conn);
             ad.Fill(dt);
             dataGridView1.DataSource = dt;
         }

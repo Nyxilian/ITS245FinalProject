@@ -30,15 +30,12 @@ namespace FinalProject
             InitializeComponent();
         }
 
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if(e.KeyCode == Keys.Enter) 
-            {
-                 username = textBox1.Text;
-                 password = textBox2.Text;
+            username = textBox1.Text;
+            password = textBox2.Text;
 
-                ValidationMethod(username, password);
-            }
+            ValidationMethod(username, password);
         }
 
         private void ValidationMethod(string username, string password)
@@ -61,6 +58,10 @@ namespace FinalProject
                 {
                     MessageBox.Show("Logging In...");
                     LogCred = true;
+
+                    SelectPatient selectPatientForm = new SelectPatient();
+                    this.Hide();
+                    selectPatientForm.ShowDialog();
                 }
                 else if (storedpassword != password)
                 {
@@ -70,11 +71,6 @@ namespace FinalProject
                     textBox2.Clear();
                 }
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

@@ -22,14 +22,16 @@ namespace FinalProject
         }
 
         //Load DataTable with an input Query
-        public static MySqlDataAdapter LoadTable(string sqlQuery, MySqlConnection conn)
+        public static DataTable LoadTable(string sqlQuery, MySqlConnection conn)
         {
             MySqlCommand cmd = new MySqlCommand();
+            DataTable dt = new DataTable();
             try
             {
                 cmd = new MySqlCommand(sqlQuery, conn);
-                MySqlDataAdapter ad = new MySqlDataAdapter(cmd);
-                return ad;
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                return dt;
             }
             catch (Exception ex)
             {
@@ -39,6 +41,7 @@ namespace FinalProject
             {
                 cmd.Dispose();
             }
+            MessageBox.Show("Unable to retrieve data from DB.");
             return null;
         }
     }
