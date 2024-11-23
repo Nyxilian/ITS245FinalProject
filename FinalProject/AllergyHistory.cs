@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -75,12 +76,15 @@ namespace FinalProject
 
         private void UpdateListBox()
         {
-            string query = "SELECT * FROM its245final.allergyhistory";
+            string query = "SELECT * FROM its245final.allergyhistory WHERE deleted = 0;";
             ad = Functions.LoadTable(query, conn);
             ad.Fill(dt);
             foreach (DataRow row in dt.Rows)
             {
-                listBox1.Items.Add(row["Allergen"].ToString());
+                if (!listBox1.Items.Contains(row["Allergen"]))
+                {
+                    listBox1.Items.Add(row["Allergen"].ToString());
+                }
             }
         }
 
@@ -142,14 +146,96 @@ namespace FinalProject
             dataGridView1.AllowUserToAddRows = false;
         }
 
+        // Basically same codes with Patients Demographics Form
+        // Adding small details on the WHERE clauses
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // strings for query to INSERT or UPDATE the data into MySQL
+            List<string> targetColumnNames = new List<string>();
+            List<string> targetCellValues = new List<string>();
+            string query = "";
+            string temp = "";
+            int aid;
 
+            // Add the name of columns and their values into the lists
+            // if it has any values
+            foreach (DataGridViewRow row in dt.Rows)
+            {
+                aid = Convert.ToInt32(row.Cells[0].Value); // AllergyID
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (!string.IsNullOrEmpty(cell.Value.ToString()))
+                    {
+                        targetColumnNames.Add($"`{dataGridView1.Columns[cell.ColumnIndex].Name}`");
+                        if (cell.Value is DateTime) // Check if the cell contains a DateTime
+                        {
+                            DateTime dateValue = (DateTime)cell.Value;
+                            targetCellValues.Add($"\'{dateValue.ToString("yyyy/MM/dd")}\'");
+                        }
+                        else if (cell.Value is bool) // Check if the cell contains a boolean
+                        {
+                            bool boolValue = (bool)cell.Value;
+                            int t;
+                            t = boolValue ? 1 : 0;
+                            targetCellValues.Add($"{t}");
+                        }
+                        else
+                        {
+                            targetCellValues.Add($"\'{cell.Value}\'");
+                        }
+                    }
+                }
+                if (mode == 1) // Add mode
+                {
+                    temp = string.Join(", ", targetColumnNames);
+                    query = "INSERT INTO its245final.allergyhistory (" + temp + ") " +
+                        "VALUES (";
+                    temp = string.Join(", ", targetCellValues);
+                    query += temp + ");";
+                }
+                if (mode == 2) // Modify mode
+                {
+                    query = "UPDATE its245final.allergyhistory " +
+                        "SET ";
+                    // no need to be compare the count of another list
+                    // because two lists have same size
+                    for (int i = 0; i < targetColumnNames.Count; i++)
+                    {
+                        if (i != 0)
+                        {
+                            temp += ", ";
+                        }
+                        temp += targetColumnNames[i] + " = " + targetCellValues[i];
+                    }
+                    query += temp + $" WHERE PatientID = {aid};";
+                }
+                try // Executing Query
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            ModeChange(0); // Returning to View mode
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
-
+            dt.Clear();
+            ad.Fill(dt);
+            ModeChange(0);
+            if (mode == 1)
+            {
+                btnAdd.Enabled = true;
+            }
+            if (mode == 2)
+            {
+                btnModify.Enabled = true;
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
