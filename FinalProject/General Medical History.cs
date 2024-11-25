@@ -43,7 +43,7 @@ namespace FinalProject
 
         private void naviPatientDemo_Click(object sender, EventArgs e)
         {
-            PatientsDemographics patientDemographicsForm = new PatientsDemographics();
+            PatientsDemographics patientDemographicsForm = new PatientsDemographics(conn, 0);
             this.Hide();
             patientDemographicsForm.ShowDialog();
         }

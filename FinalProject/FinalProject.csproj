@@ -123,7 +123,9 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="PatientsDemographics.cs" />
+    <Compile Include="PatientsDemographics.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PatientsDemographics.Designer.cs">
       <DependentUpon>PatientsDemographics.cs</DependentUpon>
     </Compile>
@@ -135,6 +137,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="AllergyHistory.resx">
       <DependentUpon>AllergyHistory.cs</DependentUpon>
     </EmbeddedResource>

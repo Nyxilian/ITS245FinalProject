@@ -27,7 +27,9 @@ namespace FinalProject
 
             try
             {
-                DataTable dt = Functions.LoadTable(sqlQuery, conn);
+                MySqlDataAdapter ad = Functions.LoadTable(sqlQuery, conn);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
                 showFH.DataSource = dt;
             }
 
@@ -35,6 +37,11 @@ namespace FinalProject
             {
                 MessageBox.Show("Could not obtain data from database.");
             }
+        }
+
+        private void naviLogin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

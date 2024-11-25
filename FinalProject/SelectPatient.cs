@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace FinalProject
                 "FROM its245final.patientdemographics " +
                 "WHERE deleted = 0;";
 
-            Datatable.ad = LoadTable(query, conn);
+            ad = Functions.LoadTable(query, conn);
             ad.Fill(dt);
             dataGridView1.DataSource = dt;
         }

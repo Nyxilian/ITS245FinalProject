@@ -14,9 +14,11 @@ namespace FinalProject
 {
     public partial class Login : Form
     {
-        public static bool LogCred;
-        public static string username;
-        public static string password;
+        private string username;
+        private string password;
+
+        public string Username { get; set; }
+        public string Password { get; set; }
 
         private MySqlConnection conn;
 
@@ -32,13 +34,13 @@ namespace FinalProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            username = textBox1.Text;
-            password = textBox2.Text;
+            Username = textBox1.Text;
+            Password = textBox2.Text;
 
-            ValidationMethod(username, password);
+            ValidationMethod(Username, Password);
         }
 
-        private void ValidationMethod(string username, string password)
+        public void ValidationMethod(string username, string password)
         {
             using(MySqlCommand cmd = new MySqlCommand("login_confirm", conn))
             {
@@ -53,20 +55,25 @@ namespace FinalProject
                 cmd.ExecuteNonQuery();
 
                 string storedpassword = cmd.Parameters["PW"].Value?.ToString();
+                string storedusername = cmd.Parameters["UN"].Value?.ToString();
 
-                if (storedpassword == password)
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Missing username/password! Please fill both boxes with your credentials!");
+                }
+
+                else if (storedpassword == password && storedusername == username)
                 {
                     MessageBox.Show("Logging In...");
-                    LogCred = true;
-
+                    UserLog.CreateLoginFile(ref username, ref password);
                     SelectPatient selectPatientForm = new SelectPatient();
                     this.Hide();
                     selectPatientForm.ShowDialog();
                 }
-                else if (storedpassword != password)
+
+                else if (storedpassword != password || storedusername != username)
                 {
                     MessageBox.Show("Invalid Credentials. Please Try Inputting Your Username and/or Password Again.");
-                    LogCred = false;
                     textBox1.Clear();
                     textBox2.Clear();
                 }
