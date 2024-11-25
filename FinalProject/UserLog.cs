@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using Mysqlx.Crud;
 
 namespace FinalProject
 {
-    internal class UserLog : Login
+    internal class UserLog : Login 
     {
        public static void CreateLoginFile(ref string username, ref string password)
        {
