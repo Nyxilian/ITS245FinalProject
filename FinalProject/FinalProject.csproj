@@ -123,6 +123,7 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Patient.cs" />
     <Compile Include="PatientsDemographics.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -15,21 +15,23 @@ namespace FinalProject
         // Open Connection with MySql
         public static MySqlConnection ConnectDB()
         {
-            string connStr = "server=127.0.0.1;uid=root;pwd=toor;database=patientdb";
+            string connStr = "server=127.0.0.1;uid=root;pwd=Nyxilian@0908;database=its245final";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             return conn;
         }
 
         //Load DataTable with an input Query
-        public static MySqlDataAdapter LoadTable(string sqlQuery, MySqlConnection conn)
+        public static DataTable LoadTable(string sqlQuery, MySqlConnection conn)
         {
             MySqlCommand cmd = new MySqlCommand();
+            DataTable dt = new DataTable();
             try
             {
                 cmd = new MySqlCommand(sqlQuery, conn);
                 MySqlDataAdapter ad = new MySqlDataAdapter(cmd);
-                return ad;
+                ad.Fill(dt);
+                return dt;
             }
             catch (Exception ex)
             {
@@ -40,6 +42,35 @@ namespace FinalProject
                 cmd.Dispose();
             }
             return null;
+        }
+
+
+        public static List<Patient> patients = new List<Patient>();
+        public static void InitPatientList(MySqlConnection conn)
+        {
+            try
+            {
+                List<int> l = new List<int>();
+                string query = "select PatientID from its245final.patientdemographics where deleted = 0";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while(dr.Read())
+                        {
+                            l.Add(dr.GetInt32(0));
+                        }
+                    }
+                }
+                foreach (int i in l)
+                {
+                    patients.Add(new Patient(i, conn));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("InitPatientList Error: " + ex.Message);
+            }
         }
     }
 }
