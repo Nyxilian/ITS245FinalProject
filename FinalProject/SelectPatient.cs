@@ -14,32 +14,43 @@ namespace FinalProject
 {
     public partial class SelectPatient : Form
     {
+        private int cbIndex;
         MySqlConnection conn;
+
         public SelectPatient()
         {
             InitializeComponent();
+            conn = Functions.ConnectDB();
+            cbIndex = 0;
         }
 
-        public SelectPatient(MySqlConnection conn)
+        public SelectPatient(MySqlConnection conn, int cbIndex)
         {
+            InitializeComponent();
             this.conn = conn;
+            this.cbIndex = cbIndex;
         }
-
 
         private void SelectPatient_Load(object sender, EventArgs e)
         {
-            conn = Functions.ConnectDB();
             Functions.InitPatientList(conn);
             foreach(Patient p in Functions.patients)
             {
                 cbPatient.Items.Add(p.Info_Combo());
             }
+            cbPatient.SelectedIndex = cbIndex;
+        }
+
+        private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbIndex = cbPatient.SelectedIndex;
         }
 
         // Navigation
         private void btnToPatientDemo_Click(object sender, EventArgs e)
         {
-            
+            PatientsDemographics pd = new PatientsDemographics(conn, cbIndex);
+            pd.Show();
         }
         private void btnToAllergyHistory_Click(object sender, EventArgs e)
         {
@@ -56,5 +67,7 @@ namespace FinalProject
         {
 
         }
+
+        
     }
 }

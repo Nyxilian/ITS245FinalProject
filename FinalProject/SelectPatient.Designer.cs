@@ -149,6 +149,7 @@
             this.cbPatient.Name = "cbPatient";
             this.cbPatient.Size = new System.Drawing.Size(335, 47);
             this.cbPatient.TabIndex = 9;
+            this.cbPatient.SelectedIndexChanged += new System.EventHandler(this.cbPatient_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -265,6 +266,7 @@
             this.tBPhoneNumber.ReadOnly = true;
             this.tBPhoneNumber.Size = new System.Drawing.Size(173, 37);
             this.tBPhoneNumber.TabIndex = 7;
+            this.tBPhoneNumber.TabStop = false;
             // 
             // label8
             // 
@@ -286,6 +288,7 @@
             this.tBLastName.ReadOnly = true;
             this.tBLastName.Size = new System.Drawing.Size(173, 37);
             this.tBLastName.TabIndex = 5;
+            this.tBLastName.TabStop = false;
             // 
             // label7
             // 
@@ -307,6 +310,7 @@
             this.tBFirstName.ReadOnly = true;
             this.tBFirstName.Size = new System.Drawing.Size(173, 37);
             this.tBFirstName.TabIndex = 3;
+            this.tBFirstName.TabStop = false;
             // 
             // label6
             // 

@@ -48,6 +48,7 @@ namespace FinalProject
         public static List<Patient> patients = new List<Patient>();
         public static void InitPatientList(MySqlConnection conn)
         {
+            patients.Clear();
             try
             {
                 List<int> l = new List<int>();
