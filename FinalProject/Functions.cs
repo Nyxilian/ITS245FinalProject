@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -72,6 +73,33 @@ namespace FinalProject
             {
                 MessageBox.Show("InitPatientList Error: " + ex.Message);
             }
+        }
+
+        public static int FindPIDBycbIndex(string target)
+        {
+            foreach (Patient p in patients)
+            {
+                if (p.Info_Combo().Equals(target))
+                    return p.PID;
+            }
+            return -1;
+        }
+
+
+        public static bool IsValidDate(string inputDate)
+        {
+            if (inputDate == null)
+                return true;
+            // Format "YYYY-MM-DD"
+            string pattern = @"^\d{4}-\d{2}-\d{2}$";
+
+            if (Regex.IsMatch(inputDate, pattern))
+            {
+                DateTime parsedDate;
+                return DateTime.TryParse(inputDate, out parsedDate);
+            }
+
+            return false;
         }
     }
 }

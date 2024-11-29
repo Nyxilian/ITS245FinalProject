@@ -34,73 +34,73 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.checkDeleted = new System.Windows.Forms.CheckBox();
+            this.tbNOKRTP = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.textBox27 = new System.Windows.Forms.TextBox();
+            this.tbNOKID = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.textBox24 = new System.Windows.Forms.TextBox();
+            this.tbDateEntered = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.tbComments = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.tbCurrentPrimaryHCPId = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox29 = new System.Windows.Forms.TextBox();
+            this.tbReferral = new System.Windows.Forms.TextBox();
+            this.tbEthnicAssoication = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.tbGender = new System.Windows.Forms.TextBox();
+            this.tbDateOfExpire = new System.Windows.Forms.TextBox();
+            this.tbDOB = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.tbSSN = new System.Windows.Forms.TextBox();
+            this.tbEmploymentStatus = new System.Windows.Forms.TextBox();
+            this.tbEmailAddress = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.tbEmerPhoneNum = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbMarital = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.tbPtHomePhone = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox28 = new System.Windows.Forms.TextBox();
+            this.tbCitizenship = new System.Windows.Forms.TextBox();
+            this.tbHomeCity = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
+            this.tbHSPR = new System.Windows.Forms.TextBox();
+            this.tbReligion = new System.Windows.Forms.TextBox();
+            this.tbHomeAddress = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.tbSuffix = new System.Windows.Forms.TextBox();
+            this.tbCountry = new System.Windows.Forms.TextBox();
+            this.tbPtMiddleInitial = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.tbPtFirstName = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tbPtPreviousLastName = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tbPtLastName = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.tbHomeZip = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbHospitalMR = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbPatientID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnToFamilyHistory = new System.Windows.Forms.Button();
+            this.btnToGenMedHis = new System.Windows.Forms.Button();
+            this.btnToSelectPatient = new System.Windows.Forms.Button();
             this.btnToLogin = new System.Windows.Forms.Button();
             this.btnToAllergyHistory = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -116,6 +116,7 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(12, 53);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(179, 42);
@@ -126,6 +127,7 @@
             // 
             // btnModify
             // 
+            this.btnModify.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModify.Location = new System.Drawing.Point(12, 101);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(179, 42);
@@ -136,6 +138,7 @@
             // 
             // btnUndo
             // 
+            this.btnUndo.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUndo.Location = new System.Drawing.Point(12, 196);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(179, 42);
@@ -146,6 +149,7 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(12, 244);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(179, 42);
@@ -156,6 +160,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(12, 149);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(179, 42);
@@ -167,91 +172,92 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel4.Controls.Add(this.checkBox1);
-            this.panel4.Controls.Add(this.textBox30);
+            this.panel4.Controls.Add(this.checkDeleted);
+            this.panel4.Controls.Add(this.tbNOKRTP);
             this.panel4.Controls.Add(this.label33);
-            this.panel4.Controls.Add(this.textBox27);
+            this.panel4.Controls.Add(this.tbNOKID);
             this.panel4.Controls.Add(this.label30);
-            this.panel4.Controls.Add(this.textBox24);
+            this.panel4.Controls.Add(this.tbDateEntered);
             this.panel4.Controls.Add(this.label27);
-            this.panel4.Controls.Add(this.textBox20);
+            this.panel4.Controls.Add(this.tbComments);
             this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.textBox17);
+            this.panel4.Controls.Add(this.tbCurrentPrimaryHCPId);
             this.panel4.Controls.Add(this.label20);
-            this.panel4.Controls.Add(this.textBox14);
-            this.panel4.Controls.Add(this.textBox29);
+            this.panel4.Controls.Add(this.tbReferral);
+            this.panel4.Controls.Add(this.tbEthnicAssoication);
             this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.textBox26);
-            this.panel4.Controls.Add(this.textBox10);
-            this.panel4.Controls.Add(this.textBox23);
+            this.panel4.Controls.Add(this.tbGender);
+            this.panel4.Controls.Add(this.tbDateOfExpire);
+            this.panel4.Controls.Add(this.tbDOB);
             this.panel4.Controls.Add(this.label13);
-            this.panel4.Controls.Add(this.textBox19);
-            this.panel4.Controls.Add(this.textBox7);
-            this.panel4.Controls.Add(this.textBox16);
+            this.panel4.Controls.Add(this.tbSSN);
+            this.panel4.Controls.Add(this.tbEmploymentStatus);
+            this.panel4.Controls.Add(this.tbEmailAddress);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.label32);
-            this.panel4.Controls.Add(this.textBox13);
+            this.panel4.Controls.Add(this.tbEmerPhoneNum);
             this.panel4.Controls.Add(this.label29);
-            this.panel4.Controls.Add(this.textBox4);
+            this.panel4.Controls.Add(this.tbMarital);
             this.panel4.Controls.Add(this.label26);
-            this.panel4.Controls.Add(this.textBox9);
+            this.panel4.Controls.Add(this.tbPtHomePhone);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.textBox6);
-            this.panel4.Controls.Add(this.textBox28);
+            this.panel4.Controls.Add(this.tbCitizenship);
+            this.panel4.Controls.Add(this.tbHomeCity);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.textBox25);
-            this.panel4.Controls.Add(this.textBox21);
-            this.panel4.Controls.Add(this.textBox22);
+            this.panel4.Controls.Add(this.tbHSPR);
+            this.panel4.Controls.Add(this.tbReligion);
+            this.panel4.Controls.Add(this.tbHomeAddress);
             this.panel4.Controls.Add(this.label12);
-            this.panel4.Controls.Add(this.textBox18);
-            this.panel4.Controls.Add(this.textBox3);
-            this.panel4.Controls.Add(this.textBox15);
+            this.panel4.Controls.Add(this.tbSuffix);
+            this.panel4.Controls.Add(this.tbCountry);
+            this.panel4.Controls.Add(this.tbPtMiddleInitial);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.label31);
-            this.panel4.Controls.Add(this.textBox12);
+            this.panel4.Controls.Add(this.tbPtFirstName);
             this.panel4.Controls.Add(this.label28);
             this.panel4.Controls.Add(this.label24);
             this.panel4.Controls.Add(this.label25);
-            this.panel4.Controls.Add(this.textBox8);
+            this.panel4.Controls.Add(this.tbPtPreviousLastName);
             this.panel4.Controls.Add(this.label21);
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.textBox5);
+            this.panel4.Controls.Add(this.tbPtLastName);
             this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.textBox11);
+            this.panel4.Controls.Add(this.tbHomeZip);
             this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.textBox2);
+            this.panel4.Controls.Add(this.tbHospitalMR);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label14);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.tbPatientID);
             this.panel4.Controls.Add(this.label2);
             this.panel4.Location = new System.Drawing.Point(12, 86);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(637, 526);
             this.panel4.TabIndex = 16;
             // 
-            // checkBox1
+            // checkDeleted
             // 
-            this.checkBox1.BackColor = System.Drawing.Color.White;
-            this.checkBox1.Font = new System.Drawing.Font("Sans Serif Collection", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(448, 481);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(170, 27);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Deleted";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.checkDeleted.BackColor = System.Drawing.Color.White;
+            this.checkDeleted.Enabled = false;
+            this.checkDeleted.Font = new System.Drawing.Font("Sans Serif Collection", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkDeleted.Location = new System.Drawing.Point(448, 481);
+            this.checkDeleted.Name = "checkDeleted";
+            this.checkDeleted.Size = new System.Drawing.Size(170, 27);
+            this.checkDeleted.TabIndex = 4;
+            this.checkDeleted.Text = "Deleted";
+            this.checkDeleted.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkDeleted.UseVisualStyleBackColor = false;
             // 
-            // textBox30
+            // tbNOKRTP
             // 
-            this.textBox30.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox30.Location = new System.Drawing.Point(525, 382);
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(99, 30);
-            this.textBox30.TabIndex = 1;
+            this.tbNOKRTP.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbNOKRTP.Location = new System.Drawing.Point(525, 382);
+            this.tbNOKRTP.Name = "tbNOKRTP";
+            this.tbNOKRTP.Size = new System.Drawing.Size(99, 30);
+            this.tbNOKRTP.TabIndex = 1;
             // 
             // label33
             // 
@@ -265,13 +271,13 @@
             this.label33.Text = "NextOfKin\r\nRelationship\r\nToPatient";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox27
+            // tbNOKID
             // 
-            this.textBox27.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox27.Location = new System.Drawing.Point(525, 330);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(99, 30);
-            this.textBox27.TabIndex = 1;
+            this.tbNOKID.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbNOKID.Location = new System.Drawing.Point(525, 330);
+            this.tbNOKID.Name = "tbNOKID";
+            this.tbNOKID.Size = new System.Drawing.Size(99, 30);
+            this.tbNOKID.TabIndex = 1;
             // 
             // label30
             // 
@@ -285,13 +291,13 @@
             this.label30.Text = "NextOfKinID";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox24
+            // tbDateEntered
             // 
-            this.textBox24.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox24.Location = new System.Drawing.Point(525, 291);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(99, 30);
-            this.textBox24.TabIndex = 1;
+            this.tbDateEntered.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbDateEntered.Location = new System.Drawing.Point(525, 291);
+            this.tbDateEntered.Name = "tbDateEntered";
+            this.tbDateEntered.Size = new System.Drawing.Size(99, 30);
+            this.tbDateEntered.TabIndex = 1;
             // 
             // label27
             // 
@@ -305,13 +311,13 @@
             this.label27.Text = "DateEntered";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox20
+            // tbComments
             // 
-            this.textBox20.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox20.Location = new System.Drawing.Point(525, 243);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(99, 30);
-            this.textBox20.TabIndex = 1;
+            this.tbComments.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbComments.Location = new System.Drawing.Point(525, 243);
+            this.tbComments.Name = "tbComments";
+            this.tbComments.Size = new System.Drawing.Size(99, 30);
+            this.tbComments.TabIndex = 1;
             // 
             // label23
             // 
@@ -325,13 +331,13 @@
             this.label23.Text = "Comments";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox17
+            // tbCurrentPrimaryHCPId
             // 
-            this.textBox17.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox17.Location = new System.Drawing.Point(526, 201);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(99, 30);
-            this.textBox17.TabIndex = 1;
+            this.tbCurrentPrimaryHCPId.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbCurrentPrimaryHCPId.Location = new System.Drawing.Point(526, 201);
+            this.tbCurrentPrimaryHCPId.Name = "tbCurrentPrimaryHCPId";
+            this.tbCurrentPrimaryHCPId.Size = new System.Drawing.Size(99, 30);
+            this.tbCurrentPrimaryHCPId.TabIndex = 1;
             // 
             // label20
             // 
@@ -345,21 +351,21 @@
             this.label20.Text = "Current\r\nPrimaryHCPId";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox14
+            // tbReferral
             // 
-            this.textBox14.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox14.Location = new System.Drawing.Point(525, 162);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(99, 30);
-            this.textBox14.TabIndex = 1;
+            this.tbReferral.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbReferral.Location = new System.Drawing.Point(525, 162);
+            this.tbReferral.Name = "tbReferral";
+            this.tbReferral.Size = new System.Drawing.Size(99, 30);
+            this.tbReferral.TabIndex = 1;
             // 
-            // textBox29
+            // tbEthnicAssoication
             // 
-            this.textBox29.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox29.Location = new System.Drawing.Point(328, 383);
-            this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(91, 30);
-            this.textBox29.TabIndex = 1;
+            this.tbEthnicAssoication.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbEthnicAssoication.Location = new System.Drawing.Point(328, 383);
+            this.tbEthnicAssoication.Name = "tbEthnicAssoication";
+            this.tbEthnicAssoication.Size = new System.Drawing.Size(91, 30);
+            this.tbEthnicAssoication.TabIndex = 1;
             // 
             // label17
             // 
@@ -373,29 +379,29 @@
             this.label17.Text = "Referral";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox26
+            // tbGender
             // 
-            this.textBox26.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox26.Location = new System.Drawing.Point(328, 340);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(91, 30);
-            this.textBox26.TabIndex = 1;
+            this.tbGender.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbGender.Location = new System.Drawing.Point(328, 340);
+            this.tbGender.Name = "tbGender";
+            this.tbGender.Size = new System.Drawing.Size(91, 30);
+            this.tbGender.TabIndex = 1;
             // 
-            // textBox10
+            // tbDateOfExpire
             // 
-            this.textBox10.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox10.Location = new System.Drawing.Point(525, 125);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(99, 30);
-            this.textBox10.TabIndex = 1;
+            this.tbDateOfExpire.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbDateOfExpire.Location = new System.Drawing.Point(525, 125);
+            this.tbDateOfExpire.Name = "tbDateOfExpire";
+            this.tbDateOfExpire.Size = new System.Drawing.Size(99, 30);
+            this.tbDateOfExpire.TabIndex = 1;
             // 
-            // textBox23
+            // tbDOB
             // 
-            this.textBox23.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox23.Location = new System.Drawing.Point(328, 298);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(91, 30);
-            this.textBox23.TabIndex = 1;
+            this.tbDOB.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbDOB.Location = new System.Drawing.Point(328, 298);
+            this.tbDOB.Name = "tbDOB";
+            this.tbDOB.Size = new System.Drawing.Size(91, 30);
+            this.tbDOB.TabIndex = 1;
             // 
             // label13
             // 
@@ -409,29 +415,29 @@
             this.label13.Text = "DateOfExpire\r\n";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox19
+            // tbSSN
             // 
-            this.textBox19.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox19.Location = new System.Drawing.Point(327, 256);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(91, 30);
-            this.textBox19.TabIndex = 1;
+            this.tbSSN.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbSSN.Location = new System.Drawing.Point(327, 256);
+            this.tbSSN.Name = "tbSSN";
+            this.tbSSN.Size = new System.Drawing.Size(91, 30);
+            this.tbSSN.TabIndex = 1;
             // 
-            // textBox7
+            // tbEmploymentStatus
             // 
-            this.textBox7.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox7.Location = new System.Drawing.Point(525, 80);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(99, 30);
-            this.textBox7.TabIndex = 1;
+            this.tbEmploymentStatus.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbEmploymentStatus.Location = new System.Drawing.Point(525, 80);
+            this.tbEmploymentStatus.Name = "tbEmploymentStatus";
+            this.tbEmploymentStatus.Size = new System.Drawing.Size(99, 30);
+            this.tbEmploymentStatus.TabIndex = 1;
             // 
-            // textBox16
+            // tbEmailAddress
             // 
-            this.textBox16.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox16.Location = new System.Drawing.Point(327, 210);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(91, 30);
-            this.textBox16.TabIndex = 1;
+            this.tbEmailAddress.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbEmailAddress.Location = new System.Drawing.Point(327, 210);
+            this.tbEmailAddress.Name = "tbEmailAddress";
+            this.tbEmailAddress.Size = new System.Drawing.Size(91, 30);
+            this.tbEmailAddress.TabIndex = 1;
             // 
             // label10
             // 
@@ -457,13 +463,13 @@
             this.label32.Text = "Ethnic\r\nAssociation";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox13
+            // tbEmerPhoneNum
             // 
-            this.textBox13.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox13.Location = new System.Drawing.Point(327, 156);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(91, 30);
-            this.textBox13.TabIndex = 1;
+            this.tbEmerPhoneNum.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbEmerPhoneNum.Location = new System.Drawing.Point(327, 156);
+            this.tbEmerPhoneNum.Name = "tbEmerPhoneNum";
+            this.tbEmerPhoneNum.Size = new System.Drawing.Size(91, 30);
+            this.tbEmerPhoneNum.TabIndex = 1;
             // 
             // label29
             // 
@@ -477,13 +483,13 @@
             this.label29.Text = "Gender";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox4
+            // tbMarital
             // 
-            this.textBox4.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox4.Location = new System.Drawing.Point(525, 22);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(99, 30);
-            this.textBox4.TabIndex = 1;
+            this.tbMarital.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbMarital.Location = new System.Drawing.Point(525, 22);
+            this.tbMarital.Name = "tbMarital";
+            this.tbMarital.Size = new System.Drawing.Size(99, 30);
+            this.tbMarital.TabIndex = 1;
             // 
             // label26
             // 
@@ -497,13 +503,13 @@
             this.label26.Text = "DOB";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox9
+            // tbPtHomePhone
             // 
-            this.textBox9.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox9.Location = new System.Drawing.Point(329, 103);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(91, 30);
-            this.textBox9.TabIndex = 1;
+            this.tbPtHomePhone.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPtHomePhone.Location = new System.Drawing.Point(329, 103);
+            this.tbPtHomePhone.Name = "tbPtHomePhone";
+            this.tbPtHomePhone.Size = new System.Drawing.Size(91, 30);
+            this.tbPtHomePhone.TabIndex = 1;
             // 
             // label22
             // 
@@ -541,21 +547,21 @@
             this.label19.Text = "EmailAddress";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox6
+            // tbCitizenship
             // 
-            this.textBox6.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox6.Location = new System.Drawing.Point(329, 55);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(91, 30);
-            this.textBox6.TabIndex = 1;
+            this.tbCitizenship.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbCitizenship.Location = new System.Drawing.Point(329, 55);
+            this.tbCitizenship.Name = "tbCitizenship";
+            this.tbCitizenship.Size = new System.Drawing.Size(91, 30);
+            this.tbCitizenship.TabIndex = 1;
             // 
-            // textBox28
+            // tbHomeCity
             // 
-            this.textBox28.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox28.Location = new System.Drawing.Point(123, 411);
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(89, 30);
-            this.textBox28.TabIndex = 1;
+            this.tbHomeCity.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbHomeCity.Location = new System.Drawing.Point(123, 344);
+            this.tbHomeCity.Name = "tbHomeCity";
+            this.tbHomeCity.Size = new System.Drawing.Size(89, 30);
+            this.tbHomeCity.TabIndex = 1;
             // 
             // label16
             // 
@@ -569,29 +575,29 @@
             this.label16.Text = "Emergency\r\nPhoneNumber";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox25
+            // tbHSPR
             // 
-            this.textBox25.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox25.Location = new System.Drawing.Point(123, 352);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(89, 30);
-            this.textBox25.TabIndex = 1;
+            this.tbHSPR.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbHSPR.Location = new System.Drawing.Point(123, 394);
+            this.tbHSPR.Name = "tbHSPR";
+            this.tbHSPR.Size = new System.Drawing.Size(89, 30);
+            this.tbHSPR.TabIndex = 1;
             // 
-            // textBox21
+            // tbReligion
             // 
-            this.textBox21.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox21.Location = new System.Drawing.Point(327, 431);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(91, 30);
-            this.textBox21.TabIndex = 1;
+            this.tbReligion.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbReligion.Location = new System.Drawing.Point(327, 431);
+            this.tbReligion.Name = "tbReligion";
+            this.tbReligion.Size = new System.Drawing.Size(91, 30);
+            this.tbReligion.TabIndex = 1;
             // 
-            // textBox22
+            // tbHomeAddress
             // 
-            this.textBox22.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox22.Location = new System.Drawing.Point(123, 296);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(89, 30);
-            this.textBox22.TabIndex = 1;
+            this.tbHomeAddress.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbHomeAddress.Location = new System.Drawing.Point(123, 296);
+            this.tbHomeAddress.Name = "tbHomeAddress";
+            this.tbHomeAddress.Size = new System.Drawing.Size(89, 30);
+            this.tbHomeAddress.TabIndex = 1;
             // 
             // label12
             // 
@@ -605,29 +611,29 @@
             this.label12.Text = "PtHomePhone";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox18
+            // tbSuffix
             // 
-            this.textBox18.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox18.Location = new System.Drawing.Point(123, 260);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(89, 30);
-            this.textBox18.TabIndex = 1;
+            this.tbSuffix.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbSuffix.Location = new System.Drawing.Point(123, 260);
+            this.tbSuffix.Name = "tbSuffix";
+            this.tbSuffix.Size = new System.Drawing.Size(89, 30);
+            this.tbSuffix.TabIndex = 1;
             // 
-            // textBox3
+            // tbCountry
             // 
-            this.textBox3.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox3.Location = new System.Drawing.Point(329, 19);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(91, 30);
-            this.textBox3.TabIndex = 1;
+            this.tbCountry.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbCountry.Location = new System.Drawing.Point(329, 19);
+            this.tbCountry.Name = "tbCountry";
+            this.tbCountry.Size = new System.Drawing.Size(91, 30);
+            this.tbCountry.TabIndex = 1;
             // 
-            // textBox15
+            // tbPtMiddleInitial
             // 
-            this.textBox15.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox15.Location = new System.Drawing.Point(123, 221);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(89, 30);
-            this.textBox15.TabIndex = 1;
+            this.tbPtMiddleInitial.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPtMiddleInitial.Location = new System.Drawing.Point(123, 221);
+            this.tbPtMiddleInitial.Name = "tbPtMiddleInitial";
+            this.tbPtMiddleInitial.Size = new System.Drawing.Size(89, 30);
+            this.tbPtMiddleInitial.TabIndex = 1;
             // 
             // label9
             // 
@@ -646,27 +652,27 @@
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.Color.White;
             this.label31.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.label31.Location = new System.Drawing.Point(48, 413);
+            this.label31.Location = new System.Drawing.Point(41, 346);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(69, 24);
+            this.label31.Size = new System.Drawing.Size(76, 24);
             this.label31.TabIndex = 0;
-            this.label31.Text = "PatientID";
+            this.label31.Text = "HomeCity";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox12
+            // tbPtFirstName
             // 
-            this.textBox12.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox12.Location = new System.Drawing.Point(123, 181);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(89, 30);
-            this.textBox12.TabIndex = 1;
+            this.tbPtFirstName.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPtFirstName.Location = new System.Drawing.Point(123, 181);
+            this.tbPtFirstName.Name = "tbPtFirstName";
+            this.tbPtFirstName.Size = new System.Drawing.Size(89, 30);
+            this.tbPtFirstName.TabIndex = 1;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.BackColor = System.Drawing.Color.White;
             this.label28.Font = new System.Drawing.Font("Sans Serif Collection", 5F);
-            this.label28.Location = new System.Drawing.Point(39, 340);
+            this.label28.Location = new System.Drawing.Point(39, 382);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(78, 51);
             this.label28.TabIndex = 0;
@@ -697,13 +703,13 @@
             this.label25.Text = "HomeAddress";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox8
+            // tbPtPreviousLastName
             // 
-            this.textBox8.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox8.Location = new System.Drawing.Point(123, 135);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(89, 30);
-            this.textBox8.TabIndex = 1;
+            this.tbPtPreviousLastName.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPtPreviousLastName.Location = new System.Drawing.Point(123, 135);
+            this.tbPtPreviousLastName.Name = "tbPtPreviousLastName";
+            this.tbPtPreviousLastName.Size = new System.Drawing.Size(89, 30);
+            this.tbPtPreviousLastName.TabIndex = 1;
             // 
             // label21
             // 
@@ -741,13 +747,13 @@
             this.label18.Text = "PtMiddleInitial";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox5
+            // tbPtLastName
             // 
-            this.textBox5.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox5.Location = new System.Drawing.Point(123, 92);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(89, 30);
-            this.textBox5.TabIndex = 1;
+            this.tbPtLastName.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPtLastName.Location = new System.Drawing.Point(123, 92);
+            this.tbPtLastName.Name = "tbPtLastName";
+            this.tbPtLastName.Size = new System.Drawing.Size(89, 30);
+            this.tbPtLastName.TabIndex = 1;
             // 
             // label15
             // 
@@ -761,13 +767,13 @@
             this.label15.Text = "PtFirstName";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox11
+            // tbHomeZip
             // 
-            this.textBox11.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox11.Location = new System.Drawing.Point(123, 451);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(89, 30);
-            this.textBox11.TabIndex = 1;
+            this.tbHomeZip.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbHomeZip.Location = new System.Drawing.Point(123, 451);
+            this.tbHomeZip.Name = "tbHomeZip";
+            this.tbHomeZip.Size = new System.Drawing.Size(89, 30);
+            this.tbHomeZip.TabIndex = 1;
             // 
             // label11
             // 
@@ -781,13 +787,13 @@
             this.label11.Text = "PtPrevious\r\nLastName";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox2
+            // tbHospitalMR
             // 
-            this.textBox2.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox2.Location = new System.Drawing.Point(123, 51);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(89, 30);
-            this.textBox2.TabIndex = 1;
+            this.tbHospitalMR.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbHospitalMR.Location = new System.Drawing.Point(123, 51);
+            this.tbHospitalMR.Name = "tbHospitalMR";
+            this.tbHospitalMR.Size = new System.Drawing.Size(89, 30);
+            this.tbHospitalMR.TabIndex = 1;
             // 
             // label8
             // 
@@ -825,13 +831,13 @@
             this.label5.Text = "HospitalMR#";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // tbPatientID
             // 
-            this.textBox1.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.textBox1.Location = new System.Drawing.Point(123, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(89, 30);
-            this.textBox1.TabIndex = 1;
+            this.tbPatientID.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.tbPatientID.Location = new System.Drawing.Point(123, 10);
+            this.tbPatientID.Name = "tbPatientID";
+            this.tbPatientID.Size = new System.Drawing.Size(89, 30);
+            this.tbPatientID.TabIndex = 1;
             // 
             // label2
             // 
@@ -862,9 +868,10 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(58, 12);
+            this.label4.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(49, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 35);
+            this.label4.Size = new System.Drawing.Size(113, 35);
             this.label4.TabIndex = 0;
             this.label4.Text = "Action Menu";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -872,9 +879,9 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.btnToFamilyHistory);
+            this.panel2.Controls.Add(this.btnToGenMedHis);
+            this.panel2.Controls.Add(this.btnToSelectPatient);
             this.panel2.Controls.Add(this.btnToLogin);
             this.panel2.Controls.Add(this.btnToAllergyHistory);
             this.panel2.Controls.Add(this.label3);
@@ -884,38 +891,41 @@
             this.panel2.Size = new System.Drawing.Size(200, 290);
             this.panel2.TabIndex = 14;
             // 
-            // button6
+            // btnToFamilyHistory
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(13, 245);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(179, 32);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Family History";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnToFamilyHistory.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToFamilyHistory.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToFamilyHistory.Location = new System.Drawing.Point(13, 245);
+            this.btnToFamilyHistory.Name = "btnToFamilyHistory";
+            this.btnToFamilyHistory.Size = new System.Drawing.Size(179, 32);
+            this.btnToFamilyHistory.TabIndex = 6;
+            this.btnToFamilyHistory.Text = "Family History";
+            this.btnToFamilyHistory.UseVisualStyleBackColor = false;
+            this.btnToFamilyHistory.Click += new System.EventHandler(this.btnToFamilyHistory_Click);
             // 
-            // button4
+            // btnToGenMedHis
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.button4.Location = new System.Drawing.Point(13, 169);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(179, 32);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "General Medical History";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnToGenMedHis.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToGenMedHis.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.btnToGenMedHis.Location = new System.Drawing.Point(13, 169);
+            this.btnToGenMedHis.Name = "btnToGenMedHis";
+            this.btnToGenMedHis.Size = new System.Drawing.Size(179, 32);
+            this.btnToGenMedHis.TabIndex = 4;
+            this.btnToGenMedHis.Text = "General Medical History";
+            this.btnToGenMedHis.UseVisualStyleBackColor = false;
+            this.btnToGenMedHis.Click += new System.EventHandler(this.btnToGenMedHis_Click);
             // 
-            // button2
+            // btnToSelectPatient
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(13, 93);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(179, 32);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Select Patient";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnToSelectPatient.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToSelectPatient.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToSelectPatient.Location = new System.Drawing.Point(13, 93);
+            this.btnToSelectPatient.Name = "btnToSelectPatient";
+            this.btnToSelectPatient.Size = new System.Drawing.Size(179, 32);
+            this.btnToSelectPatient.TabIndex = 2;
+            this.btnToSelectPatient.Text = "Select Patient";
+            this.btnToSelectPatient.UseVisualStyleBackColor = false;
+            this.btnToSelectPatient.Click += new System.EventHandler(this.btnToSelectPatient_Click);
             // 
             // btnToLogin
             // 
@@ -927,16 +937,19 @@
             this.btnToLogin.TabIndex = 1;
             this.btnToLogin.Text = "Login";
             this.btnToLogin.UseVisualStyleBackColor = false;
+            this.btnToLogin.Click += new System.EventHandler(this.btnToLogin_Click);
             // 
             // btnToAllergyHistory
             // 
             this.btnToAllergyHistory.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToAllergyHistory.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToAllergyHistory.Location = new System.Drawing.Point(13, 207);
             this.btnToAllergyHistory.Name = "btnToAllergyHistory";
             this.btnToAllergyHistory.Size = new System.Drawing.Size(179, 32);
             this.btnToAllergyHistory.TabIndex = 6;
             this.btnToAllergyHistory.Text = "Allergy History";
             this.btnToAllergyHistory.UseVisualStyleBackColor = false;
+            this.btnToAllergyHistory.Click += new System.EventHandler(this.btnToAllergyHistory_Click);
             // 
             // label3
             // 
@@ -951,7 +964,9 @@
             // 
             // btnToPatientDemo
             // 
-            this.btnToPatientDemo.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToPatientDemo.BackColor = System.Drawing.Color.Orange;
+            this.btnToPatientDemo.Enabled = false;
+            this.btnToPatientDemo.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
             this.btnToPatientDemo.Location = new System.Drawing.Point(13, 131);
             this.btnToPatientDemo.Name = "btnToPatientDemo";
             this.btnToPatientDemo.Size = new System.Drawing.Size(179, 32);
@@ -978,6 +993,7 @@
             this.cbPatient.Name = "cbPatient";
             this.cbPatient.Size = new System.Drawing.Size(335, 47);
             this.cbPatient.TabIndex = 10;
+            this.cbPatient.SelectedIndexChanged += new System.EventHandler(this.cbPatient_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -1023,75 +1039,75 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnToFamilyHistory;
+        private System.Windows.Forms.Button btnToGenMedHis;
+        private System.Windows.Forms.Button btnToSelectPatient;
         private System.Windows.Forms.Button btnToLogin;
         private System.Windows.Forms.Button btnToAllergyHistory;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnToPatientDemo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbPatientID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbPatient;
-        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.TextBox tbReligion;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox tbHomeZip;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox30;
+        private System.Windows.Forms.CheckBox checkDeleted;
+        private System.Windows.Forms.TextBox tbNOKRTP;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox textBox27;
+        private System.Windows.Forms.TextBox tbNOKID;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TextBox textBox24;
+        private System.Windows.Forms.TextBox tbDateEntered;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.TextBox tbComments;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox tbCurrentPrimaryHCPId;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox29;
+        private System.Windows.Forms.TextBox tbReferral;
+        private System.Windows.Forms.TextBox tbEthnicAssoication;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox23;
+        private System.Windows.Forms.TextBox tbGender;
+        private System.Windows.Forms.TextBox tbDateOfExpire;
+        private System.Windows.Forms.TextBox tbDOB;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox tbSSN;
+        private System.Windows.Forms.TextBox tbEmploymentStatus;
+        private System.Windows.Forms.TextBox tbEmailAddress;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox tbEmerPhoneNum;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbMarital;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox tbPtHomePhone;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox28;
+        private System.Windows.Forms.TextBox tbCitizenship;
+        private System.Windows.Forms.TextBox tbHomeCity;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.TextBox tbHSPR;
+        private System.Windows.Forms.TextBox tbHomeAddress;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox tbSuffix;
+        private System.Windows.Forms.TextBox tbCountry;
+        private System.Windows.Forms.TextBox tbPtMiddleInitial;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox tbPtFirstName;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox tbPtPreviousLastName;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbPtLastName;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbHospitalMR;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
     }
