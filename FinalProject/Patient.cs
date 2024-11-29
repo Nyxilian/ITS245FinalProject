@@ -55,18 +55,7 @@ namespace FinalProject
 
         public string Info_Combo()
         {
-            int age = DateTime.Now.Year - DOB.Year;
-
-            // Check if the birthday has already occurred this year
-            if (DateTime.Now.DayOfYear < DOB.DayOfYear)
-            {
-                age--; // Subtract 1 if the birthday hasn't happened yet this year
-            }
-            if(age < 0)
-            {
-                age += 100;
-            }
-            return PFirstName + " " + PLastName + " / " + age.ToString();
+            return PFirstName + " " + PLastName + " / " + DOB.ToString("yy/MM/dd");
         }
     }
 }
