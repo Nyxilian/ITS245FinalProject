@@ -31,15 +31,15 @@
             this.btnToPatientDemo = new System.Windows.Forms.Button();
             this.btnToAllergyHistory = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.TBSearchPatients = new System.Windows.Forms.TextBox();
+            this.tbSearchPatients = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearchPatient = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbPatient = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnToFamilyHistory = new System.Windows.Forms.Button();
+            this.btnToGenMedHis = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnToLogin = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,6 +61,7 @@
             // btnToPatientDemo
             // 
             this.btnToPatientDemo.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToPatientDemo.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
             this.btnToPatientDemo.Location = new System.Drawing.Point(13, 131);
             this.btnToPatientDemo.Name = "btnToPatientDemo";
             this.btnToPatientDemo.Size = new System.Drawing.Size(179, 32);
@@ -72,6 +73,7 @@
             // btnToAllergyHistory
             // 
             this.btnToAllergyHistory.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToAllergyHistory.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToAllergyHistory.Location = new System.Drawing.Point(13, 207);
             this.btnToAllergyHistory.Name = "btnToAllergyHistory";
             this.btnToAllergyHistory.Size = new System.Drawing.Size(179, 32);
@@ -83,7 +85,8 @@
             // btnUpdate
             // 
             this.btnUpdate.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnUpdate.Location = new System.Drawing.Point(12, 69);
+            this.btnUpdate.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(11, 62);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(180, 59);
             this.btnUpdate.TabIndex = 7;
@@ -91,17 +94,18 @@
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // TBSearchPatients
+            // tbSearchPatients
             // 
-            this.TBSearchPatients.Location = new System.Drawing.Point(11, 232);
-            this.TBSearchPatients.Name = "TBSearchPatients";
-            this.TBSearchPatients.Size = new System.Drawing.Size(177, 21);
-            this.TBSearchPatients.TabIndex = 3;
+            this.tbSearchPatients.Location = new System.Drawing.Point(11, 231);
+            this.tbSearchPatients.Name = "tbSearchPatients";
+            this.tbSearchPatients.Size = new System.Drawing.Size(177, 21);
+            this.tbSearchPatients.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(11, 198);
+            this.label2.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.label2.Location = new System.Drawing.Point(11, 197);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(177, 31);
             this.label2.TabIndex = 4;
@@ -111,7 +115,8 @@
             // btnSearchPatient
             // 
             this.btnSearchPatient.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSearchPatient.Location = new System.Drawing.Point(11, 259);
+            this.btnSearchPatient.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchPatient.Location = new System.Drawing.Point(11, 258);
             this.btnSearchPatient.Name = "btnSearchPatient";
             this.btnSearchPatient.Size = new System.Drawing.Size(177, 31);
             this.btnSearchPatient.TabIndex = 5;
@@ -154,8 +159,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.button4);
+            this.panel2.Controls.Add(this.btnToFamilyHistory);
+            this.panel2.Controls.Add(this.btnToGenMedHis);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.btnToLogin);
             this.panel2.Controls.Add(this.btnToAllergyHistory);
@@ -166,32 +171,36 @@
             this.panel2.Size = new System.Drawing.Size(200, 290);
             this.panel2.TabIndex = 10;
             // 
-            // button6
+            // btnToFamilyHistory
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(13, 245);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(179, 32);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Family History";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnToFamilyHistory.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToFamilyHistory.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToFamilyHistory.Location = new System.Drawing.Point(13, 245);
+            this.btnToFamilyHistory.Name = "btnToFamilyHistory";
+            this.btnToFamilyHistory.Size = new System.Drawing.Size(179, 32);
+            this.btnToFamilyHistory.TabIndex = 6;
+            this.btnToFamilyHistory.Text = "Family History";
+            this.btnToFamilyHistory.UseVisualStyleBackColor = false;
+            this.btnToFamilyHistory.Click += new System.EventHandler(this.btnToFamilyHistory_Click);
             // 
-            // button4
+            // btnToGenMedHis
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
-            this.button4.Location = new System.Drawing.Point(13, 169);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(179, 32);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "General Medical History";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnToGenMedHis.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnToGenMedHis.Font = new System.Drawing.Font("Sans Serif Collection", 7F);
+            this.btnToGenMedHis.Location = new System.Drawing.Point(13, 169);
+            this.btnToGenMedHis.Name = "btnToGenMedHis";
+            this.btnToGenMedHis.Size = new System.Drawing.Size(179, 32);
+            this.btnToGenMedHis.TabIndex = 4;
+            this.btnToGenMedHis.Text = "General Medical History";
+            this.btnToGenMedHis.UseVisualStyleBackColor = false;
+            this.btnToGenMedHis.Click += new System.EventHandler(this.btnToGenMedHis_Click);
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button2.BackColor = System.Drawing.Color.Orange;
+            this.button2.Enabled = false;
             this.button2.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button2.Location = new System.Drawing.Point(13, 93);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(179, 32);
@@ -209,6 +218,7 @@
             this.btnToLogin.TabIndex = 1;
             this.btnToLogin.Text = "Login";
             this.btnToLogin.UseVisualStyleBackColor = false;
+            this.btnToLogin.Click += new System.EventHandler(this.btnToLogin_Click);
             // 
             // label3
             // 
@@ -226,7 +236,7 @@
             this.panel3.BackColor = System.Drawing.Color.SteelBlue;
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.btnSearchPatient);
-            this.panel3.Controls.Add(this.TBSearchPatients);
+            this.panel3.Controls.Add(this.tbSearchPatients);
             this.panel3.Controls.Add(this.btnUpdate);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(656, 308);
@@ -237,9 +247,10 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(52, 12);
+            this.label4.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(47, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 35);
+            this.label4.Size = new System.Drawing.Size(116, 35);
             this.label4.TabIndex = 0;
             this.label4.Text = "Action Menu";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -352,15 +363,15 @@
         private System.Windows.Forms.Button btnToPatientDemo;
         private System.Windows.Forms.Button btnToAllergyHistory;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.TextBox TBSearchPatients;
+        private System.Windows.Forms.TextBox tbSearchPatients;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSearchPatient;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnToFamilyHistory;
+        private System.Windows.Forms.Button btnToGenMedHis;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnToLogin;
         private System.Windows.Forms.Panel panel3;
