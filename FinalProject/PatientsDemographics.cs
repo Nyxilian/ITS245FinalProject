@@ -19,21 +19,50 @@ namespace FinalProject
     public partial class PatientsDemographics : Form
     {
         private int cbIndex;
+        private int cbIndexCopy; // Copy the value of cbIndex when the user uses Add mode
         MySqlConnection conn;
         // View 0, Add 1, Modify 2
         private int mode = 0;
 
-        private void ModeChange(int mode)
+        private void ModeChange(int m)
         {
-            switch (mode)
+            switch (m)
             {
                 case 0:
+                    btnAdd.Enabled = true;
+                    btnModify.Enabled = true;
+                    btnSave.Enabled = false;
+                    btnUndo.Enabled = false;
+                    btnDelete.Enabled = false;
+
+                    btnSave.BackColor = Color.LightGray;
+                    btnUndo.BackColor = Color.LightGray;
+                    btnDelete.BackColor = Color.LightGray;
                     break;
                 case 1:
+                    btnAdd.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnUndo.Enabled = true;
+                    btnDelete.Enabled = true;
+
+                    btnAdd.BackColor = Color.LightGray;
+                    btnSave.BackColor = Color.White;
+                    btnUndo.BackColor = Color.White;
+                    btnDelete.BackColor = Color.White;
                     break;
                 case 2:
+                    btnModify.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnUndo.Enabled = true;
+                    btnDelete.Enabled = true;
+
+                    btnModify.BackColor = Color.LightGray;
+                    btnSave.BackColor = Color.White;
+                    btnUndo.BackColor= Color.White;
+                    btnDelete.BackColor = Color.White;
                     break;
             }
+            mode = m;
         }
         
         public PatientsDemographics(MySqlConnection conn, int cbIndex)
@@ -45,24 +74,39 @@ namespace FinalProject
 
         private void PatientsDemographics_Load(object sender, EventArgs e)
         {
-            Functions.InitPatientList(conn);
-            foreach (Patient p in Functions.patients)
-            {
-                cbPatient.Items.Add(p.Info_Combo());
-            }
+            UpdateCB();
             cbPatient.SelectedIndex = cbIndex;
-            BtnControl(false);
+            tbEnable(false);
             UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            ModeChange(0);
         }
 
-        private void BtnControl(bool b)
+        private void tbEnable(bool b)
         {
             foreach (Control control in panel4.Controls)
             {
                 if(control is TextBox)
                 {
                     control.Enabled = b;
+                    if(b)
+                    {
+                        control.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        control.BackColor = Color.LightGray;
+                    }
                 }
+            }
+        }
+
+        private void UpdateCB()
+        {
+            cbPatient.Items.Clear();
+            Functions.InitPatientList(conn);
+            foreach (Patient p in Functions.patients)
+            {
+                cbPatient.Items.Add(p.Info_Combo());
             }
         }
 
@@ -163,7 +207,10 @@ namespace FinalProject
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
-            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            if (!string.IsNullOrEmpty(cbPatient.Items[cbIndex].ToString()))
+            {
+                UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            }
         }
 
         // Navigation
@@ -195,12 +242,26 @@ namespace FinalProject
         // Action Menu
         private void btnAdd_Click(object sender, EventArgs e)
         {
-           
+            cbIndexCopy = cbIndex;
+            UpdateCB();
+            cbPatient.Items.Add("");
+            cbPatient.SelectedIndex = cbPatient.Items.Count - 1;
+            foreach (Control control in panel4.Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.Text = "";
+                }
+            }
+            tbEnable(true);
+            ModeChange(1);
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-           
+            UpdateCB();
+            tbEnable(true);
+            ModeChange(2);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -279,11 +340,30 @@ namespace FinalProject
                 return;
             }
             MessageBox.Show("Data Saved Successfully");
+
+            Functions.InitPatientList(conn);
+            foreach (Patient p in Functions.patients)
+            {
+                cbPatient.Items.Add(p.Info_Combo());
+            }
+            cbPatient.SelectedIndex = cbIndex;
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
-           
+            if(mode == 1)
+            {
+                cbIndex = cbIndexCopy;
+            }
+            Functions.InitPatientList(conn);
+            foreach (Patient p in Functions.patients)
+            {
+                cbPatient.Items.Add(p.Info_Combo());
+            }
+            cbPatient.SelectedIndex = cbIndex;
+            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            tbEnable(false);
+            ModeChange(0);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
