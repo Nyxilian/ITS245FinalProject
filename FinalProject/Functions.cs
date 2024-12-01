@@ -88,7 +88,7 @@ namespace FinalProject
 
         public static bool IsValidDate(string inputDate)
         {
-            if (inputDate == null)
+            if (string.IsNullOrEmpty(inputDate))
                 return true;
             // Format "YYYY-MM-DD"
             string pattern = @"^\d{4}-\d{2}-\d{2}$";

@@ -57,7 +57,7 @@ namespace FinalProject
 
         private void naviAllergyHis_Click(object sender, EventArgs e)
         {
-            AllergyHistory allergyHistoryForm = new AllergyHistory();
+            AllergyHistory allergyHistoryForm = new AllergyHistory(conn, 1);
             this.Hide();
             allergyHistoryForm.Show();
         }

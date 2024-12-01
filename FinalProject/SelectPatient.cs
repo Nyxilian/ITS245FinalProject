@@ -50,6 +50,7 @@ namespace FinalProject
             tBPhoneNumber.Text = Functions.patients[cbIndex].PPhoneNum;
         }
 
+
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
@@ -57,10 +58,8 @@ namespace FinalProject
         }
         private void btnToPatientDemo_Click(object sender, EventArgs e)
         {
-            this.Hide();
             PatientsDemographics pd = new PatientsDemographics(conn, cbIndex);
-            pd.ShowDialog();
-            this.Close();
+            pd.Show();
         }
         private void btnToGenMedHis_Click(object sender, EventArgs e)
         {
@@ -68,12 +67,14 @@ namespace FinalProject
         }
         private void btnToAllergyHistory_Click(object sender, EventArgs e)
         {
-            
+            AllergyHistory ah = new AllergyHistory(conn, cbIndex);
+            ah.Show();
         }
         private void btnToFamilyHistory_Click(object sender, EventArgs e)
         {
 
         }
+
 
         // Action Menu
         private void button1_Click(object sender, EventArgs e) // Search Command
@@ -103,6 +104,7 @@ namespace FinalProject
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            cbPatient.Items.Clear();
             Functions.InitPatientList(conn);
             foreach (Patient p in Functions.patients)
             {

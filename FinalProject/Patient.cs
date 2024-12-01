@@ -40,9 +40,22 @@ namespace FinalProject
 
                 cmd.ExecuteNonQuery();
 
-                PLastName = cmd.Parameters["@O_LAST"].Value.ToString();
-                PFirstName = cmd.Parameters["@O_FIRST"].Value.ToString();
-                DOB = (DateTime)cmd.Parameters["@O_DOB"].Value;
+                if (!string.IsNullOrEmpty(cmd.Parameters["@O_LAST"].Value.ToString()))
+                    PLastName = cmd.Parameters["@O_LAST"].Value.ToString();
+                else
+                    PLastName = null;
+
+                if (!string.IsNullOrEmpty(cmd.Parameters["@O_FIRST"].Value.ToString()))
+                    PFirstName = cmd.Parameters["@O_FIRST"].Value.ToString();
+                else
+                    PFirstName = null;
+                DateTime result;
+                if (DateTime.TryParse(cmd.Parameters["@O_DOB"].Value.ToString(), out result))
+                    DOB = result;
+                else
+                    DOB = DateTime.Today;
+                    
+
                 PPhoneNum = cmd.Parameters["@O_PHONENUM"].Value.ToString();
 
                 cmd.Dispose();

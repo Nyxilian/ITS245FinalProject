@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
+using MySqlX.XDevAPI.Common;
 
 namespace FinalProject
 {
@@ -24,7 +25,7 @@ namespace FinalProject
         // View 0, Add 1, Modify 2
         private int mode = 0;
 
-        private void ModeChange(int m)
+        private void ModeChange(int m) // bascially for controlling Action menu
         {
             switch (m)
             {
@@ -35,6 +36,8 @@ namespace FinalProject
                     btnUndo.Enabled = false;
                     btnDelete.Enabled = false;
 
+                    btnAdd.BackColor = Color.White;
+                    btnModify.BackColor = Color.White;
                     btnSave.BackColor = Color.LightGray;
                     btnUndo.BackColor = Color.LightGray;
                     btnDelete.BackColor = Color.LightGray;
@@ -65,21 +68,7 @@ namespace FinalProject
             mode = m;
         }
         
-        public PatientsDemographics(MySqlConnection conn, int cbIndex)
-        {
-            InitializeComponent();
-            this.conn = conn;
-            this.cbIndex = cbIndex;
-        }
-
-        private void PatientsDemographics_Load(object sender, EventArgs e)
-        {
-            UpdateCB();
-            cbPatient.SelectedIndex = cbIndex;
-            tbEnable(false);
-            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
-            ModeChange(0);
-        }
+        
 
         private void tbEnable(bool b)
         {
@@ -121,6 +110,7 @@ namespace FinalProject
                 {
                     if (reader.Read())
                     {
+                        tbPatientID.Text = reader["PatientID"].ToString();
                         tbHospitalMR.Text = reader["HospitalMR#"].ToString();
                         tbPtLastName.Text = reader["PtLastName"].ToString();
                         tbPtPreviousLastName.Text = reader["PtPreviousLastName"].ToString();
@@ -204,6 +194,23 @@ namespace FinalProject
             }
         }
 
+
+        public PatientsDemographics(MySqlConnection conn, int cbIndex)
+        {
+            InitializeComponent();
+            this.conn = conn;
+            this.cbIndex = cbIndex;
+        }
+
+        private void PatientsDemographics_Load(object sender, EventArgs e)
+        {
+            UpdateCB();
+            cbPatient.SelectedIndex = cbIndex;
+            tbEnable(false);
+            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            ModeChange(0);
+        }
+
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
@@ -213,6 +220,7 @@ namespace FinalProject
             }
         }
 
+
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
@@ -221,7 +229,8 @@ namespace FinalProject
 
         private void btnToSelectPatient_Click(object sender, EventArgs e)
         {
-
+            SelectPatient sp = new SelectPatient(conn, cbIndex);
+            sp.Show();
         }
 
         private void btnToGenMedHis_Click(object sender, EventArgs e)
@@ -239,6 +248,7 @@ namespace FinalProject
 
         }
 
+
         // Action Menu
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -254,12 +264,29 @@ namespace FinalProject
                 }
             }
             tbEnable(true);
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT MAX(PatientID) FROM patientdemographics;", conn);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    tbPatientID.Text = (Convert.ToInt16(result.ToString()) + 1).ToString();
+                }
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with bringing Max(patientID): " + ex.Message);
+            }
+            tbPatientID.Enabled = false;
             ModeChange(1);
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
             UpdateCB();
+            cbPatient.SelectedIndex = cbIndex;
             tbEnable(true);
             ModeChange(2);
         }
@@ -295,12 +322,12 @@ namespace FinalProject
                 if (mode == 2) // Modify mode
                 {
                     cmd = new MySqlCommand("UpdatePDByPID", conn);
-                    cmd.Parameters.AddWithValue("p_PatientID", tbPatientID.Text);
                 }
                 
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Add parameters to the command object
+                cmd.Parameters.AddWithValue("p_PatientID", tbPatientID.Text);
                 cmd.Parameters.AddWithValue("p_HospitalMR", tbHospitalMR.Text);
                 cmd.Parameters.AddWithValue("p_PtLastName", tbPtLastName.Text);
                 cmd.Parameters.AddWithValue("p_PtPreviousLastName", tbPtPreviousLastName.Text);
@@ -317,22 +344,44 @@ namespace FinalProject
                 cmd.Parameters.AddWithValue("p_EmergencyPhoneNumber", tbEmerPhoneNum.Text);
                 cmd.Parameters.AddWithValue("p_EmailAddress", tbEmailAddress.Text);
                 cmd.Parameters.AddWithValue("p_SSN", tbSSN.Text);
-                cmd.Parameters.AddWithValue("p_DOB", tbDOB.Text);
+                if (string.IsNullOrEmpty(tbDOB.Text))
+                {
+                    cmd.Parameters.AddWithValue("p_DOB", null);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_DOB", tbDOB.Text);
+                }
                 cmd.Parameters.AddWithValue("p_Gender", tbGender.Text);
                 cmd.Parameters.AddWithValue("p_EthnicAssociation", tbEthnicAssoication.Text);
                 cmd.Parameters.AddWithValue("p_Religion", tbReligion.Text);
                 cmd.Parameters.AddWithValue("p_MaritalStatus", tbMarital.Text);
                 cmd.Parameters.AddWithValue("p_EmploymentStatus", tbEmploymentStatus.Text);
-                cmd.Parameters.AddWithValue("p_DateofExpire", tbDateOfExpire.Text);
+                if (string.IsNullOrEmpty(tbDateOfExpire.Text))
+                {
+                    cmd.Parameters.AddWithValue("p_DateofExpire", null);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_DateofExpire", tbDateOfExpire.Text);
+                }
                 cmd.Parameters.AddWithValue("p_Referral", tbReferral.Text);
                 cmd.Parameters.AddWithValue("p_CurrentPrimaryHCPId", tbCurrentPrimaryHCPId.Text);
                 cmd.Parameters.AddWithValue("p_Comments", tbComments.Text);
-                cmd.Parameters.AddWithValue("p_DateEntered", tbDateEntered.Text);
+                if (string.IsNullOrEmpty(tbDateEntered.Text))
+                {
+                    cmd.Parameters.AddWithValue("p_DateEntered", null);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_DateEntered", tbDateEntered.Text);
+                }
                 cmd.Parameters.AddWithValue("p_NextOfKinID", tbNOKID.Text);
                 cmd.Parameters.AddWithValue("p_NextOfKinRelationshipToPatient", tbNOKRTP.Text);
                 cmd.Parameters.AddWithValue("p_Deleted", checkDeleted.Checked ? 1 : 0);
 
                 cmd.ExecuteNonQuery();
+                cmd.Dispose();
             }
             catch (Exception ex)
             {
@@ -341,16 +390,19 @@ namespace FinalProject
             }
             MessageBox.Show("Data Saved Successfully");
 
+            cbPatient.Items.Clear();
             Functions.InitPatientList(conn);
             foreach (Patient p in Functions.patients)
             {
                 cbPatient.Items.Add(p.Info_Combo());
             }
             cbPatient.SelectedIndex = cbIndex;
+            ModeChange(0);
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
+            cbPatient.Items.Clear();
             if(mode == 1)
             {
                 cbIndex = cbIndexCopy;
@@ -368,7 +420,25 @@ namespace FinalProject
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-           
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("DeleteByPID", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("pid", Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with deleting data: " + ex.Message);
+            }
+            Functions.InitPatientList(conn);
+            foreach (Patient p in Functions.patients)
+            {
+                cbPatient.Items.Add(p.Info_Combo());
+            }
+            cbPatient.SelectedIndex = 0;
+            ModeChange(0);
         }
     }
 }
