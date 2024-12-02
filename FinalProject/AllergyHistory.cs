@@ -30,13 +30,13 @@ namespace FinalProject
                     btnModify.Enabled = true;
                     btnSave.Enabled = false;
                     btnUndo.Enabled = false;
-                    btnDelete.Enabled = false;
+                    btnDelete.Enabled = true;
 
                     btnAdd.BackColor = Color.White;
                     btnModify.BackColor = Color.White;
                     btnSave.BackColor = Color.LightGray;
                     btnUndo.BackColor = Color.LightGray;
-                    btnDelete.BackColor = Color.LightGray;
+                    btnDelete.BackColor = Color.White;
                     break;
                 case 1:
                     btnAdd.Enabled = false;
@@ -79,6 +79,17 @@ namespace FinalProject
                     {
                         control.BackColor = Color.LightGray;
                     }
+                }
+            }
+        }
+
+        private void tbClear()
+        {
+            foreach (Control control in panel4.Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.Text = "";
                 }
             }
         }
@@ -155,7 +166,12 @@ namespace FinalProject
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
-            UpdateDGV(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            UpdateDGV(Functions.patients[cbIndex].PID);
+            tbClear();
+            if (mode != 0)
+            {
+                ModeChange(0);
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -163,6 +179,10 @@ namespace FinalProject
             if(e.RowIndex < dt.Rows.Count)
             {
                 UpdateTB(Convert.ToInt32(dt.Rows[e.RowIndex][0].ToString()));
+                if(mode == 1)
+                {
+                    ModeChange(0);
+                }
             }
         }
 
@@ -197,9 +217,6 @@ namespace FinalProject
         // Action Menu
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            dataGridView1.AllowUserToAddRows = true;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Rows[dataGridView1.RowCount - 1].ReadOnly = false;
             foreach (Control control in panel4.Controls)
             {
                 if (control is TextBox)
@@ -208,26 +225,126 @@ namespace FinalProject
                 }
             }
             tbEnable(true);
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT MAX(AllergyID) FROM allergyhistory;", conn);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    tbAllergyID.Text = (Convert.ToInt16(result.ToString()) + 1).ToString();
+                }
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with bringing Max(AllergyID): " + ex.Message);
+            }
+            tbAllergyID.Enabled = false;
+            tbPatientID.Text = Functions.patients[cbIndex].PID.ToString();
+            tbPatientID.Enabled = false;
+            ModeChange(1);
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            
+            UpdateCB();
+            cbPatient.SelectedIndex = cbIndex;
+            tbEnable(true);
+            ModeChange(2);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+            MySqlCommand cmd = null;
+
+            if (!Functions.IsValidDate(tbStartDate.Text))
+            {
+                MessageBox.Show("Check the AllergyStartDate input format | YYYY-MM-DD");
+                return;
+            }
+            if (!Functions.IsValidDate(tbEndDate.Text))
+            {
+                MessageBox.Show("Check the AllergyEndDate input format | YYYY-MM-DD");
+                return;
+            }
+
+            try
+            {
+                if (mode == 1) // Add mode
+                {
+                    cmd = new MySqlCommand("InsertAH", conn);
+                }
+                if (mode == 2) // Modify mode
+                {
+                    cmd = new MySqlCommand("UpdateAHByAID", conn);
+                }
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("a_AllergyID", tbAllergyID.Text);
+                cmd.Parameters.AddWithValue("a_PatientID", tbPatientID.Text);
+                cmd.Parameters.AddWithValue("a_Allergen", tbAllergen.Text);
+                if (string.IsNullOrEmpty(tbStartDate.Text))
+                {
+                    cmd.Parameters.AddWithValue("a_AllergyStartDate", null);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("a_AllergyStartDate", tbStartDate.Text);
+                }
+                if (string.IsNullOrEmpty(tbEndDate.Text))
+                {
+                    cmd.Parameters.AddWithValue("a_AllergyEndDate", null);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("a_AllergyEndDate", tbEndDate.Text);
+                }
+                cmd.Parameters.AddWithValue("a_AllergyDescription", tbDescription.Text);
+                cmd.Parameters.AddWithValue("a_deleted", checkDeleted.Checked ? 1 : 0);
+
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with executing query: " + ex.Message);
+                return;
+            }
+            MessageBox.Show("Data Saved Successfully");
+
+            UpdateDGV(Functions.patients[cbIndex].PID);
+            UpdateTB(Convert.ToInt32(tbAllergyID.Text));
+            ModeChange(0);
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
-            
+            UpdateDGV(Functions.patients[cbIndex].PID);
+            tbClear();
+            tbEnable(false);
+            ModeChange(0);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("DeleteByAID", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("aid", tbAllergyID.Text);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with deleting data: " + ex.Message);
+            }
+            UpdateCB();
+            cbPatient.SelectedIndex = 0;
+            tbClear();
+            ModeChange(0);
+            MessageBox.Show("Data Deleted successfully");
         }
 
 

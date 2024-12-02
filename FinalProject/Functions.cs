@@ -58,7 +58,7 @@ namespace FinalProject
                 {
                     using (MySqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while(dr.Read())
+                        while (dr.Read())
                         {
                             l.Add(dr.GetInt32(0));
                         }
@@ -73,16 +73,6 @@ namespace FinalProject
             {
                 MessageBox.Show("InitPatientList Error: " + ex.Message);
             }
-        }
-
-        public static int FindPIDBycbIndex(string target)
-        {
-            foreach (Patient p in patients)
-            {
-                if (p.Info_Combo().Equals(target))
-                    return p.PID;
-            }
-            return -1;
         }
 
 

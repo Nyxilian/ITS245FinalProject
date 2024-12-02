@@ -34,13 +34,13 @@ namespace FinalProject
                     btnModify.Enabled = true;
                     btnSave.Enabled = false;
                     btnUndo.Enabled = false;
-                    btnDelete.Enabled = false;
+                    btnDelete.Enabled = true;
 
                     btnAdd.BackColor = Color.White;
                     btnModify.BackColor = Color.White;
                     btnSave.BackColor = Color.LightGray;
                     btnUndo.BackColor = Color.LightGray;
-                    btnDelete.BackColor = Color.LightGray;
+                    btnDelete.BackColor = Color.White;
                     break;
                 case 1:
                     btnAdd.Enabled = false;
@@ -207,7 +207,7 @@ namespace FinalProject
             UpdateCB();
             cbPatient.SelectedIndex = cbIndex;
             tbEnable(false);
-            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            UpdateTB(Functions.patients[cbIndex].PID);
             ModeChange(0);
         }
 
@@ -216,7 +216,7 @@ namespace FinalProject
             cbIndex = cbPatient.SelectedIndex;
             if (!string.IsNullOrEmpty(cbPatient.Items[cbIndex].ToString()))
             {
-                UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+                UpdateTB(Functions.patients[cbIndex].PID);
             }
         }
 
@@ -390,12 +390,7 @@ namespace FinalProject
             }
             MessageBox.Show("Data Saved Successfully");
 
-            cbPatient.Items.Clear();
-            Functions.InitPatientList(conn);
-            foreach (Patient p in Functions.patients)
-            {
-                cbPatient.Items.Add(p.Info_Combo());
-            }
+            UpdateCB();
             cbPatient.SelectedIndex = cbIndex;
             ModeChange(0);
         }
@@ -407,13 +402,9 @@ namespace FinalProject
             {
                 cbIndex = cbIndexCopy;
             }
-            Functions.InitPatientList(conn);
-            foreach (Patient p in Functions.patients)
-            {
-                cbPatient.Items.Add(p.Info_Combo());
-            }
+            UpdateCB();
             cbPatient.SelectedIndex = cbIndex;
-            UpdateTB(Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+            UpdateTB(Functions.patients[cbIndex].PID);
             tbEnable(false);
             ModeChange(0);
         }
@@ -424,7 +415,7 @@ namespace FinalProject
             {
                 MySqlCommand cmd = new MySqlCommand("DeleteByPID", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("pid", Functions.FindPIDBycbIndex(cbPatient.Items[cbIndex].ToString()));
+                cmd.Parameters.AddWithValue("pid", Functions.patients[cbIndex].PID);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
             }
@@ -432,13 +423,10 @@ namespace FinalProject
             {
                 MessageBox.Show("Error with deleting data: " + ex.Message);
             }
-            Functions.InitPatientList(conn);
-            foreach (Patient p in Functions.patients)
-            {
-                cbPatient.Items.Add(p.Info_Combo());
-            }
+            UpdateCB();
             cbPatient.SelectedIndex = 0;
             ModeChange(0);
+            MessageBox.Show("Data Deleted successfully");
         }
     }
 }

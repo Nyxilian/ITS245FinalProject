@@ -140,6 +140,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 16);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(230, 500);
             this.dataGridView1.TabIndex = 0;
@@ -183,7 +184,6 @@
             this.tbDescription.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDescription.Location = new System.Drawing.Point(189, 396);
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.ReadOnly = true;
             this.tbDescription.Size = new System.Drawing.Size(173, 37);
             this.tbDescription.TabIndex = 7;
             // 
@@ -204,7 +204,6 @@
             this.tbEndDate.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEndDate.Location = new System.Drawing.Point(189, 326);
             this.tbEndDate.Name = "tbEndDate";
-            this.tbEndDate.ReadOnly = true;
             this.tbEndDate.Size = new System.Drawing.Size(173, 37);
             this.tbEndDate.TabIndex = 7;
             // 
@@ -225,7 +224,6 @@
             this.tbStartDate.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbStartDate.Location = new System.Drawing.Point(189, 253);
             this.tbStartDate.Name = "tbStartDate";
-            this.tbStartDate.ReadOnly = true;
             this.tbStartDate.Size = new System.Drawing.Size(173, 37);
             this.tbStartDate.TabIndex = 7;
             // 
@@ -246,7 +244,6 @@
             this.tbAllergen.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAllergen.Location = new System.Drawing.Point(190, 185);
             this.tbAllergen.Name = "tbAllergen";
-            this.tbAllergen.ReadOnly = true;
             this.tbAllergen.Size = new System.Drawing.Size(173, 37);
             this.tbAllergen.TabIndex = 7;
             // 
@@ -267,7 +264,6 @@
             this.tbPatientID.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPatientID.Location = new System.Drawing.Point(189, 112);
             this.tbPatientID.Name = "tbPatientID";
-            this.tbPatientID.ReadOnly = true;
             this.tbPatientID.Size = new System.Drawing.Size(173, 37);
             this.tbPatientID.TabIndex = 7;
             // 
@@ -288,7 +284,6 @@
             this.tbAllergyID.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAllergyID.Location = new System.Drawing.Point(189, 38);
             this.tbAllergyID.Name = "tbAllergyID";
-            this.tbAllergyID.ReadOnly = true;
             this.tbAllergyID.Size = new System.Drawing.Size(173, 37);
             this.tbAllergyID.TabIndex = 5;
             // 
