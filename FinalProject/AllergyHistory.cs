@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -189,29 +190,44 @@ namespace FinalProject
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
-
+            Login l = new Login(conn);
+            Hide();
+            l.ShowDialog();
+            Close();
         }
 
         private void btnToSelectPatient_Click(object sender, EventArgs e)
         {
             SelectPatient sp = new SelectPatient(conn, cbIndex);
-            sp.Show();
+            Hide();
+            sp.ShowDialog();
+            Close();
         }
 
         private void btnToPatientDemo_Click(object sender, EventArgs e)
         {
             PatientsDemographics pd = new PatientsDemographics(conn, cbIndex);
-            pd.Show();
+            Hide();
+            pd.ShowDialog();
+            Close();
         }
 
         private void btnToGenMedHis_Click(object sender, EventArgs e)
         {
-
+            GeneralMedical gm = new GeneralMedical(conn, cbIndex);
+            Functions.EnableReadOnly(gm);
+            Hide();
+            gm.ShowDialog();
+            Close();
         }
 
         private void btnToFamilyHistory_Click(object sender, EventArgs e)
         {
-
+            Family_History fh = new Family_History(conn, cbIndex);
+            Functions.EnableReadOnly(fh);
+            Hide();
+            fh.ShowDialog();
+            Close();
         }
 
         // Action Menu
@@ -346,7 +362,5 @@ namespace FinalProject
             ModeChange(0);
             MessageBox.Show("Data Deleted successfully");
         }
-
-
     }
 }

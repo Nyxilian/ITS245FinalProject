@@ -224,28 +224,44 @@ namespace FinalProject
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
-
+            Login l = new Login(conn);
+            Hide();
+            l.ShowDialog();
+            Close();
         }
 
         private void btnToSelectPatient_Click(object sender, EventArgs e)
         {
             SelectPatient sp = new SelectPatient(conn, cbIndex);
-            sp.Show();
+            Hide();
+            sp.ShowDialog();
+            Close();
         }
 
         private void btnToGenMedHis_Click(object sender, EventArgs e)
         {
-
+            GeneralMedical gm = new GeneralMedical(conn, cbIndex);
+            Functions.EnableReadOnly(gm);
+            Hide();
+            gm.ShowDialog();
+            Close();
         }
 
         private void btnToAllergyHistory_Click(object sender, EventArgs e)
         {
-
+            AllergyHistory ah = new AllergyHistory(conn, cbIndex);
+            Hide();
+            ah.ShowDialog();
+            Close();
         }
 
         private void btnToFamilyHistory_Click(object sender, EventArgs e)
         {
-
+            Family_History fh = new Family_History(conn, cbIndex);
+            Functions.EnableReadOnly(fh);
+            Hide();
+            fh.ShowDialog();
+            Close();
         }
 
 

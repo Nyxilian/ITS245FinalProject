@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -90,6 +91,71 @@ namespace FinalProject
             }
 
             return false;
+        }
+
+        public static void EnableReadOnly(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Enabled = false;
+                    textBox.ReadOnly = true;
+                    textBox.BackColor = System.Drawing.Color.Gray;
+                    textBox.BorderStyle = BorderStyle.FixedSingle;
+                }
+                if (control.HasChildren)
+                {
+                    EnableReadOnly(control);
+                }
+                if (control is Panel panel)
+                {
+                    panel.BackColor = System.Drawing.Color.LightSlateGray;
+                }
+            }
+            parent.BackColor = System.Drawing.Color.White;
+        }
+
+        // used to exit read only mode when button method is attatched to is clicked, changing the visual style of the form in the process to indicate the change.
+        public static void DisableReadOnly(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Enabled = true;
+                    textBox.ReadOnly = false;
+                    textBox.BackColor = System.Drawing.Color.White;
+                    textBox.BorderStyle = BorderStyle.FixedSingle;
+                }
+                if (control.HasChildren)
+                {
+                    DisableReadOnly(control);
+
+                }
+                if (control is Panel panel)
+                {
+                    panel.BackColor = System.Drawing.Color.SteelBlue;
+                }
+            }
+            parent.BackColor = System.Drawing.Color.LightBlue;
+        }
+
+        public static void ColorClick(Button button, Color newColor)
+        {
+            Color ogColor = Color.White;
+            button.BackColor = newColor;
+            int timerDurr = 500;
+
+            Timer timer = new Timer();
+            timer.Interval = timerDurr;
+            timer.Tick += (s, e) =>
+            {
+                button.BackColor = ogColor;
+                timer.Stop();
+                timer.Dispose();
+            };
+            timer.Start();
         }
     }
 }

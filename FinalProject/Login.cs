@@ -14,36 +14,36 @@ namespace FinalProject
 {
     public partial class Login : Form
     {
-        public static bool LogCred;
-        public static string username;
-        public static string password;
-
         private MySqlConnection conn;
+
+        public string Username { get; set; }
+        public string Password { get; set; }
 
         private void Login_Load(object sender, EventArgs e)
         {
             conn = Functions.ConnectDB();
         }
-
         public Login()
         {
             InitializeComponent();
         }
-
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        public Login(MySqlConnection conn)
         {
-            if(e.KeyCode == Keys.Enter) 
-            {
-                 username = textBox1.Text;
-                 password = textBox2.Text;
-
-                ValidationMethod(username, password);
-            }
+            InitializeComponent();
+            this.conn = conn;
         }
 
-        private void ValidationMethod(string username, string password)
+        private void button1_Click(object sender, EventArgs e)
         {
-            using(MySqlCommand cmd = new MySqlCommand("login_confirm", conn))
+            Username = textBox1.Text;
+            Password = textBox2.Text;
+
+            ValidationMethod(Username, Password);
+        }
+
+        public void ValidationMethod(string username, string password)
+        {
+            using (MySqlCommand cmd = new MySqlCommand("login_confirm", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -56,25 +56,30 @@ namespace FinalProject
                 cmd.ExecuteNonQuery();
 
                 string storedpassword = cmd.Parameters["PW"].Value?.ToString();
+                string storedusername = cmd.Parameters["UN"].Value?.ToString();
 
-                if (storedpassword == password)
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Missing username/password! Please fill both boxes with your credentials!");
+                }
+
+                else if (storedpassword == password && storedusername == username)
                 {
                     MessageBox.Show("Logging In...");
-                    LogCred = true;
+                    //UserLog.CreateLoginFile(ref username, ref password);
+                    SelectPatient selectPatientForm = new SelectPatient();
+                    this.Hide();
+                    selectPatientForm.ShowDialog();
+                    this.Close();
                 }
-                else if (storedpassword != password)
+
+                else if (storedpassword != password || storedusername != username)
                 {
                     MessageBox.Show("Invalid Credentials. Please Try Inputting Your Username and/or Password Again.");
-                    LogCred = false;
                     textBox1.Clear();
                     textBox2.Clear();
                 }
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
