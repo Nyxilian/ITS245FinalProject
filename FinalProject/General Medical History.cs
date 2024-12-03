@@ -1,7 +1,10 @@
-﻿﻿using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using Mysqlx.Prepare;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace FinalProject
@@ -13,6 +16,11 @@ namespace FinalProject
         int PID;
 
         int mode = 2;
+
+        public GeneralMedical()
+        {
+            InitializeComponent();
+        }
 
         public GeneralMedical(MySqlConnection conn, int cbIndex)
         {
@@ -82,7 +90,7 @@ namespace FinalProject
                     command.Parameters.Add(new MySqlParameter("O_MedicalHistoryNotes", MySqlDbType.VarChar, 100)).Direction = ParameterDirection.Output;
                     command.Parameters.Add(new MySqlParameter("O_HxObtainedBy", MySqlDbType.VarChar, 100)).Direction = ParameterDirection.Output;
                     command.Parameters.Add(new MySqlParameter("O_deleted", MySqlDbType.Int32)).Direction = ParameterDirection.Output;
-                    
+
                     command.ExecuteNonQuery();
 
                     int gmhID = Convert.ToInt32(command.Parameters["O_GeneralMedicalHistoryID"].Value);
@@ -94,7 +102,7 @@ namespace FinalProject
                     string tobaccoQuantity = command.Parameters["O_TobaccoQuantity"].Value.ToString();
                     string tobaccoDuration = command.Parameters["O_TobaccoDuraton"].Value.ToString();
                     string alcohol = command.Parameters["O_Alcohol"].Value.ToString();
-                    string alcoholDuration = command.Parameters["O_AlcoholDuration"].Value.ToString() ;
+                    string alcoholDuration = command.Parameters["O_AlcoholDuration"].Value.ToString();
                     string alcoholQuantity = command.Parameters["O_AlcoholQuantity"].Value.ToString();
                     string drug = command.Parameters["O_Drug"].Value.ToString();
                     string drugType = command.Parameters["O_DrugType"].Value.ToString();
@@ -151,7 +159,7 @@ namespace FinalProject
         {
             if (mode == 1)
             {
-                MessageBox.Show("You are already in modify mode!");
+                MessageBox.Show("You are already in Modify mode!");
                 addBtn.Enabled = true;
                 addBtn.BackColor = Color.White;
                 return;
@@ -159,7 +167,7 @@ namespace FinalProject
 
             mode = 0;
             Functions.DisableReadOnly(this);
-            MessageBox.Show("You have entered ADD mode. When adding a new entry, please ensure that all boxes have been filled.");
+            MessageBox.Show("You have entered Add mode. When adding a new entry, please ensure that all boxes have been filled.");
             addBtn.Enabled = false;
             addBtn.BackColor = System.Drawing.Color.Orange;
         }
@@ -169,7 +177,7 @@ namespace FinalProject
         {
             if (mode == 0)
             {
-                MessageBox.Show("You are already in add mode!");
+                MessageBox.Show("You are already in Add mode!");
                 modBtn.Enabled = true;
                 modBtn.BackColor = Color.White;
                 return;
@@ -190,10 +198,10 @@ namespace FinalProject
             int newPid = Convert.ToInt32(patientIDTxt.Text);
             string newMaritalStatus = marTxt.Text;
             string newEducation = eduTxt.Text;
-            string newbehavioralHistory = bhTxt.Text;
+            string newBehavioralHistory = bhTxt.Text;
             string newTobacco = tobTxt.Text;
             string newTobaccoQuantity = tQuanTxt.Text;
-            string newTobaccoDuration = tDurTxt.Text;
+            string newTobaccoDuraton = tDurTxt.Text;
             string newAlcohol = alcTxt.Text;
             string newAlcoholDuration = aDurTxt.Text;
             string newAlcoholQuantity = aQuanTxt.Text;
@@ -216,17 +224,121 @@ namespace FinalProject
             {
                 if (mode == 0)
                 {
-                    
+                    try
+                    {
+                        using (MySqlCommand command = new MySqlCommand("AddGMH", conn))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+
+                            command.Parameters.AddWithValue("@I_GeneralMedicalHistoryID", newGmhID);
+                            command.Parameters.AddWithValue("@I_PID", newPid);
+                            command.Parameters.AddWithValue("@I_MaritalStatus", newMaritalStatus);
+                            command.Parameters.AddWithValue("@I_Education", newEducation);
+                            command.Parameters.AddWithValue("@I_BehavioralHistory", newBehavioralHistory);
+                            command.Parameters.AddWithValue("@I_Tobacco", newTobacco);
+                            command.Parameters.AddWithValue("@I_TobaccoDuraton", newTobaccoDuraton);
+                            command.Parameters.AddWithValue("@I_TobaccoQuantity", newTobaccoQuantity);
+                            command.Parameters.AddWithValue("@I_Alcohol", newAlcohol);
+                            command.Parameters.AddWithValue("@I_AlcoholDuration", newAlcoholDuration);
+                            command.Parameters.AddWithValue("@I_AlcoholQuantity", newAlcoholQuantity);
+                            command.Parameters.AddWithValue("@I_Drug", newDrug);
+                            command.Parameters.AddWithValue("@I_DrugType", newDrugType);
+                            command.Parameters.AddWithValue("@I_DrugDuration", newDrugDuration);
+                            command.Parameters.AddWithValue("@I_Dietary", newDietary);
+                            command.Parameters.AddWithValue("@I_BloodType", newBloodType);
+                            command.Parameters.AddWithValue("@I_Rh", newRh);
+                            command.Parameters.AddWithValue("@I_NumberOfChildren", newNumbOfChild);
+                            command.Parameters.AddWithValue("@I_LMPStatus", newLmp);
+                            command.Parameters.AddWithValue("@I_MensesMonthlyYes", newMmYes);
+                            command.Parameters.AddWithValue("@I_MensesMonthlyNo", newMmNo);
+                            command.Parameters.AddWithValue("@I_MensesFreq", newMensesFreq);
+                            command.Parameters.AddWithValue("@I_MedicalHistoryNotes", newMhNotes);
+                            command.Parameters.AddWithValue("@I_HxObtainedBy", NewHx);
+                            command.Parameters.AddWithValue("@I_deleted", newDeleted);
+
+                            int result = command.ExecuteNonQuery();
+
+                            if (result > 0)
+                            {
+                                MessageBox.Show("New General Medical History added!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Operation Failed!");
+                            }
+
+                            addBtn.Enabled = true;
+                            addBtn.BackColor = Color.White;
+
+                            getGenMedHis();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"ERROR ADDING DATA TO DATABASE.\n{ex.Message}");
+                    }
                 }
 
                 if (mode == 1)
                 {
+                    try
+                    {
+                        using (MySqlCommand command = new MySqlCommand("UpdateGMH", conn))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
 
+                            command.Parameters.AddWithValue("@I_GeneralMedicalHistoryID", newGmhID);
+                            command.Parameters.AddWithValue("@I_PID", newPid);
+                            command.Parameters.AddWithValue("@I_MaritalStatus", newMaritalStatus);
+                            command.Parameters.AddWithValue("@I_Education", newEducation);
+                            command.Parameters.AddWithValue("@I_BehavioralHistory", newBehavioralHistory);
+                            command.Parameters.AddWithValue("@I_Tobacco", newTobacco);
+                            command.Parameters.AddWithValue("@I_TobaccoDuraton", newTobaccoDuraton);
+                            command.Parameters.AddWithValue("@I_TobaccoQuantity", newTobaccoQuantity);
+                            command.Parameters.AddWithValue("@I_Alcohol", newAlcohol);
+                            command.Parameters.AddWithValue("@I_AlcoholDuration", newAlcoholDuration);
+                            command.Parameters.AddWithValue("@I_AlcoholQuantity", newAlcoholQuantity);
+                            command.Parameters.AddWithValue("@I_Drug", newDrug);
+                            command.Parameters.AddWithValue("@I_DrugType", newDrugType);
+                            command.Parameters.AddWithValue("@I_DrugDuration", newDrugDuration);
+                            command.Parameters.AddWithValue("@I_Dietary", newDietary);
+                            command.Parameters.AddWithValue("@I_BloodType", newBloodType);
+                            command.Parameters.AddWithValue("@I_Rh", newRh);
+                            command.Parameters.AddWithValue("@I_NumberOfChildren", newNumbOfChild);
+                            command.Parameters.AddWithValue("@I_LMPStatus", newLmp);
+                            command.Parameters.AddWithValue("@I_MensesMonthlyYes", newMmYes);
+                            command.Parameters.AddWithValue("@I_MensesMonthlyNo", newMmNo);
+                            command.Parameters.AddWithValue("@I_MensesFreq", newMensesFreq);
+                            command.Parameters.AddWithValue("@I_MedicalHistoryNotes", newMhNotes);
+                            command.Parameters.AddWithValue("@I_HxObtainedBy", NewHx);
+                            command.Parameters.AddWithValue("@I_deleted", newDeleted);
+
+                            int result = command.ExecuteNonQuery();
+
+                            if (result > 0)
+                            {
+                                MessageBox.Show("General Medical History updated!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Operation Failed!");
+                            }
+
+                            modBtn.Enabled = true;
+                            modBtn.BackColor = Color.White;
+
+                            getGenMedHis();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"ERROR UPDATING DATABASE\nERROR: {ex.Message}");
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"ERROR EXECUTING STORED PROCEDURE!\n{ex.Message}");
+                MessageBox.Show($"ERROR EXECUTING STORED PROCEDURES!\n{ex.Message}");
             }
         }
 
@@ -234,12 +346,43 @@ namespace FinalProject
         private void undoBtn_Click(object sender, EventArgs e)
         {
             Functions.ColorClick(undoBtn, Color.Orange);
+            getGenMedHis();
         }
 
         //Code for the delete button, which will set the deleted value of the currently viewed patient to 1/true
         private void delBtn_Click(object sender, EventArgs e)
         {
+            Functions.ColorClick(delBtn, Color.Orange);
 
+            try
+            {
+                using (MySqlCommand command = new MySqlCommand("DeleteGMH", conn))
+                {
+                    string oldPID = patientIDTxt.Text;
+                    string oldGmhID = genMedIDTxt.Text;
+
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@D_GmhID", genMedIDTxt.Text);
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show($"Patient {oldPID} with General Medical History ID {oldGmhID} has had their General Medical History record deleted.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to delete record.");
+                    }
+
+                    getGenMedHis();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ERROR DELETING DATA FROM DATABASE.\nERROR: {ex.Message}");
+            }
         }
 
         //Navigation Methods. These will be copy/pasted to all forms so the user can move between them. 
@@ -272,7 +415,7 @@ namespace FinalProject
             GeneralMedical generalMedicalForm = new GeneralMedical(conn, cbIndex);
             Functions.EnableReadOnly(generalMedicalForm);
             Hide();
-            generalMedicalForm.ShowDialog();
+            generalMedicalForm.Show();
             Close();
         }
 
@@ -280,7 +423,7 @@ namespace FinalProject
         {
             AllergyHistory allergyHistoryForm = new AllergyHistory(conn, cbIndex);
             Hide();
-            allergyHistoryForm.ShowDialog();
+            allergyHistoryForm.Show();
             Close();
         }
 
