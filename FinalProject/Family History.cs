@@ -18,7 +18,7 @@ namespace FinalProject
 {
     public partial class Family_History : Form
     {
-        private MySqlConnection conn = Functions.ConnectDB();
+        private MySqlConnection conn;
         private int cbIndex;
         private int mode = 2;
 
@@ -37,9 +37,6 @@ namespace FinalProject
 
         private void Family_History_Load(object sender, EventArgs e)
         {
-            //connect form to database 
-            conn = Functions.ConnectDB();
-
             //Initialize combobox and fill combobox with patients while preserving index.
             Functions.InitPatientList(conn);
             foreach (Patient p in Functions.patients)

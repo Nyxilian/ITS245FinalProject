@@ -31,9 +31,6 @@ namespace FinalProject
 
         private void GeneralMedical_Load(object sender, EventArgs e)
         {
-            //Connect form to database
-            conn = Functions.ConnectDB();
-
             //Initialize combobox, fill it with patients.
             Functions.InitPatientList(conn);
             foreach (Patient p in Functions.patients)
