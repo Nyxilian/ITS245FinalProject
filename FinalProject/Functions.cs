@@ -109,12 +109,7 @@ namespace FinalProject
                 {
                     EnableReadOnly(control);
                 }
-                if (control is Panel panel)
-                {
-                    panel.BackColor = System.Drawing.Color.LightSlateGray;
-                }
             }
-            parent.BackColor = System.Drawing.Color.White;
         }
 
         // used to exit read only mode when button method is attatched to is clicked, changing the visual style of the form in the process to indicate the change.
