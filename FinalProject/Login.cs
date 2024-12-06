@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,10 +54,14 @@ namespace FinalProject
                 cmd.Parameters.Add("PW", MySqlDbType.VarChar);
                 cmd.Parameters["PW"].Direction = ParameterDirection.Output;
 
+                cmd.Parameters.Add("LID", MySqlDbType.VarChar);
+                cmd.Parameters["LID"].Direction = ParameterDirection.Output;
+
                 cmd.ExecuteNonQuery();
 
                 string storedpassword = cmd.Parameters["PW"].Value?.ToString();
                 string storedusername = cmd.Parameters["UN"].Value?.ToString();
+                int loginID = Convert.ToInt32(cmd.Parameters["LID"].Value.ToString());
 
                 if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 {
@@ -67,7 +72,9 @@ namespace FinalProject
                 {
                     MessageBox.Show("Logging In...");
                     //UserLog.CreateLoginFile(ref username, ref password);
-                    SelectPatient selectPatientForm = new SelectPatient();
+                    SelectPatient selectPatientForm = new SelectPatient(conn, 0, loginID);
+                    Functions.Logging(loginID, "Logged In", conn);
+                    Functions.Logging(loginID, "Move to Select Patient Form", conn);
                     this.Hide();
                     selectPatientForm.ShowDialog();
                     this.Close();

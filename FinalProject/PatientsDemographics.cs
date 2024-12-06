@@ -7,6 +7,7 @@ using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,7 @@ namespace FinalProject
     {
         private int cbIndex;
         private int cbIndexCopy; // Copy the value of cbIndex when the user uses Add mode
+        private int loginID;
         MySqlConnection conn;
         // View 0, Add 1, Modify 2
         private int mode = 0;
@@ -184,22 +186,25 @@ namespace FinalProject
                     }
                     else
                     {
+                        Functions.Logging(loginID, $"Failed to bring Patient Demographics data; PID: {pid}", conn);
                         MessageBox.Show("No data found for the given PatientID.");
                     }
                 }
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to bring Patient Demographics data; PID: {pid}", conn);
                 MessageBox.Show("Error with Updating TextBoxes: " + ex.Message);
             }
         }
 
 
-        public PatientsDemographics(MySqlConnection conn, int cbIndex)
+        public PatientsDemographics(MySqlConnection conn, int cbIndex, int loginID)
         {
             InitializeComponent();
             this.conn = conn;
             this.cbIndex = cbIndex;
+            this.loginID = loginID;
         }
 
         private void PatientsDemographics_Load(object sender, EventArgs e)
@@ -217,6 +222,7 @@ namespace FinalProject
             if (!string.IsNullOrEmpty(cbPatient.Items[cbIndex].ToString()))
             {
                 UpdateTB(Functions.patients[cbIndex].PID);
+                Functions.Logging(loginID, $"Open the Patient Demographics record; PID: {Functions.patients[cbIndex].PID}", conn);
             }
         }
 
@@ -224,6 +230,7 @@ namespace FinalProject
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
+            Functions.Logging(loginID, "Move To Login Form", conn);
             Login l = new Login(conn);
             Hide();
             l.ShowDialog();
@@ -232,7 +239,8 @@ namespace FinalProject
 
         private void btnToSelectPatient_Click(object sender, EventArgs e)
         {
-            SelectPatient sp = new SelectPatient(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Select Patient Form", conn);
+            SelectPatient sp = new SelectPatient(conn, cbIndex, loginID);
             Hide();
             sp.ShowDialog();
             Close();
@@ -240,7 +248,8 @@ namespace FinalProject
 
         private void btnToGenMedHis_Click(object sender, EventArgs e)
         {
-            GeneralMedical gm = new GeneralMedical(conn, cbIndex);
+            Functions.Logging(loginID, "Move To General Medical History Form", conn);
+            GeneralMedical gm = new GeneralMedical(conn, cbIndex, loginID);
             Functions.EnableReadOnly(gm);
             Hide();
             gm.ShowDialog();
@@ -249,7 +258,8 @@ namespace FinalProject
 
         private void btnToAllergyHistory_Click(object sender, EventArgs e)
         {
-            AllergyHistory ah = new AllergyHistory(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Allergy History Form", conn);
+            AllergyHistory ah = new AllergyHistory(conn, cbIndex, loginID);
             Hide();
             ah.ShowDialog();
             Close();
@@ -257,7 +267,8 @@ namespace FinalProject
 
         private void btnToFamilyHistory_Click(object sender, EventArgs e)
         {
-            Family_History fh = new Family_History(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Family History Form", conn);
+            Family_History fh = new Family_History(conn, cbIndex, loginID);
             Functions.EnableReadOnly(fh);
             Hide();
             fh.ShowDialog();
@@ -290,9 +301,11 @@ namespace FinalProject
                     tbPatientID.Text = (Convert.ToInt16(result.ToString()) + 1).ToString();
                 }
                 cmd.Dispose();
+                Functions.Logging(loginID, "Try to add a new data into the Patient Demographics table", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, "Failed to add a new data into the Patient Demographics table", conn);
                 MessageBox.Show("Error with bringing Max(patientID): " + ex.Message);
             }
             tbPatientID.Enabled = false;
@@ -305,6 +318,7 @@ namespace FinalProject
             cbPatient.SelectedIndex = cbIndex;
             tbEnable(true);
             ModeChange(2);
+            Functions.Logging(loginID, "Try to modify the data of the Patient Demographics table", conn);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -314,16 +328,19 @@ namespace FinalProject
             // Check Date Input Format
             if (!Functions.IsValidDate(tbDOB.Text))
             {
+                Functions.Logging(loginID, "Failed to update the Patient Demographics table", conn);
                 MessageBox.Show("Check the DOB input format | YYYY-MM-DD");
                 return;
             }
             if (!Functions.IsValidDate(tbDateOfExpire.Text))
             {
+                Functions.Logging(loginID, "Failed to update the Patient Demographics table", conn);
                 MessageBox.Show("Check the DateOfExpire input format | YYYY-MM-DD");
                 return;
             }
             if (!Functions.IsValidDate(tbDateEntered.Text))
             {
+                Functions.Logging(loginID, "Failed to update the Patient Demographics table", conn);
                 MessageBox.Show("Check the DateEntered input format | YYYY-MM-DD");
                 return;
             }
@@ -398,9 +415,11 @@ namespace FinalProject
 
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                Functions.Logging(loginID, $"Update the Patient Demographics table; PID : {tbPatientID.Text}", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, "Failed to update the Patient Demographics table", conn);
                 MessageBox.Show("Error with executing query: " + ex.Message);
                 return;
             }
@@ -409,6 +428,7 @@ namespace FinalProject
             UpdateCB();
             cbPatient.SelectedIndex = cbIndex;
             ModeChange(0);
+            
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
@@ -423,6 +443,7 @@ namespace FinalProject
             UpdateTB(Functions.patients[cbIndex].PID);
             tbEnable(false);
             ModeChange(0);
+            Functions.Logging(loginID, "Undo the changes", conn);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -434,9 +455,11 @@ namespace FinalProject
                 cmd.Parameters.AddWithValue("pid", Functions.patients[cbIndex].PID);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                Functions.Logging(loginID, $"Delete in the Patient Demographics table; PID: {Functions.patients[cbIndex].PID}", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to delete in the Patient Demographics table; PID: {Functions.patients[cbIndex].PID}", conn);
                 MessageBox.Show("Error with deleting data: " + ex.Message);
             }
             UpdateCB();

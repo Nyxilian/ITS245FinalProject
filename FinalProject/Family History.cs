@@ -20,6 +20,7 @@ namespace FinalProject
     {
         private MySqlConnection conn;
         private int cbIndex;
+        private int loginID;
         private int mode = 2;
 
         public Family_History()
@@ -27,12 +28,13 @@ namespace FinalProject
             InitializeComponent();
         }
 
-        public Family_History(MySqlConnection conn, int cbIndex)
+        public Family_History(MySqlConnection conn, int cbIndex, int loginID)
         {
             InitializeComponent();
             Functions.EnableReadOnly(this);
             this.cbIndex = cbIndex;
             this.conn = conn;
+            this.loginID = loginID;
         }
 
         private void Family_History_Load(object sender, EventArgs e)
@@ -97,6 +99,8 @@ namespace FinalProject
             sTypeDisorderText.Text = $"{sTypeDisorder}";
             int deleted = Convert.ToInt32(showFH.Rows[i].Cells["deleted"].Value);
             deletedText.Text = deleted == 1 ? "True" : "False";
+
+            Functions.Logging(loginID, $"Open the Family History record; FID: {familyID}", conn);
         }
 
         //Enter Add mode. This will change the mode variable's value to 0, disable read only mode, and display a tutorial messagebox to the user
@@ -115,6 +119,7 @@ namespace FinalProject
             MessageBox.Show("You have entered ADD mode. When adding a new entry, please ensure that all boxes have been filled.");
             addBtn.Enabled = false;
             addBtn.BackColor = System.Drawing.Color.Orange;
+            Functions.Logging(loginID, "Try to add a new data into the Family History table", conn);
         }
 
         //Enter Modify mode. This will set the mode variable's value to 0, disable read only mode, and dispaly a tutorial messagebox to the user. 
@@ -133,6 +138,7 @@ namespace FinalProject
             MessageBox.Show("You have entered Modify mode.");
             modBtn.Enabled = false;
             modBtn.BackColor = System.Drawing.Color.Orange;
+            Functions.Logging(loginID, "Try to modify data of the Family History table", conn);
         }
 
         //Saves changes made in the textboxes to the SQL database. If mode=0, the data in the entry boxes will be used in a stored procedure to insert a new customer.
@@ -173,10 +179,12 @@ namespace FinalProject
                         if (result > 0)
                         {
                             MessageBox.Show("New Family History Added!");
+                            Functions.Logging(loginID, $"Update the Family History table; FID : {newFamilyID}", conn);
                         }
                         else
                         {
                             MessageBox.Show("Operation Failed!");
+                            Functions.Logging(loginID, "Failed to update the Family History table", conn);
                         }
 
                         addBtn.Enabled = true;
@@ -189,6 +197,7 @@ namespace FinalProject
                 }
                 catch (Exception ex)
                 {
+                    Functions.Logging(loginID, "Failed to update the Family History table", conn);
                     MessageBox.Show($"ERROR WITH STORED PROCEDURE. PLEASE CONTACT IT DEPARTMENT!\nERROR:{ex.Message.ToUpper()}");
                 }
             }
@@ -227,15 +236,18 @@ namespace FinalProject
                         if (result > 0)
                         {
                             MessageBox.Show("Successfuly Updated Family History!");
+                            Functions.Logging(loginID, $"Update the Family History table; FID : {newFamilyID}", conn);
                         }
                         else
                         {
                             MessageBox.Show("Operation Failed!");
+                            Functions.Logging(loginID, "Failed to update the Family History table", conn);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    Functions.Logging(loginID, "Failed to update the Family History table", conn);
                     MessageBox.Show($"Error With Stored Procedure. Error: {ex.Message}");
                 }
             }
@@ -272,6 +284,8 @@ namespace FinalProject
             sTypeDisorderText.Text = $"{sTypeDisorder}";
             int deleted = Convert.ToInt32(showFH.Rows[i].Cells["deleted"].Value);
             deletedText.Text = deleted == 1 ? "True" : "False";
+
+            Functions.Logging(loginID, "Undo the changes", conn);
         }
 
         private void delBtn_Click(object sender, EventArgs e)
@@ -289,10 +303,12 @@ namespace FinalProject
                     if (result > 0)
                     {
                         MessageBox.Show("Entry Has Been Marked For Deletion.");
+                        Functions.Logging(loginID, $"Delete in the Family History table; AID: {familyIDText.Text}", conn);
                     }
                     else
                     {
                         MessageBox.Show("Operation Failed");
+                        Functions.Logging(loginID, $"Failed to delete in the Family History table; AID: {familyIDText.Text}", conn);
                     }
 
                     PopulateShowFH();
@@ -300,6 +316,7 @@ namespace FinalProject
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Delete in the Family History table; AID: {familyIDText.Text}", conn);
                 MessageBox.Show($"Could Not Delete Record! Error: {ex.Message}");
             }
         }
@@ -307,6 +324,7 @@ namespace FinalProject
         // Navigation functions to allow user to change forms. The form objects have parameters that pass the current patient index and the SQL connection to the next form. 
         private void naviLogin_Click(object sender, EventArgs e)
         {
+            Functions.Logging(loginID, "Move To Login Form", conn);
             Login login = new Login(conn);
             Hide();
             login.ShowDialog();
@@ -315,7 +333,8 @@ namespace FinalProject
 
         private void naviSelectPatient_Click(object sender, EventArgs e)
         {
-            SelectPatient selectpatient = new SelectPatient(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Select Patient Form", conn);
+            SelectPatient selectpatient = new SelectPatient(conn, cbIndex, loginID);
             Hide();
             selectpatient.ShowDialog();
             Close();
@@ -323,7 +342,8 @@ namespace FinalProject
 
         private void naviPatientDemo_Click(object sender, EventArgs e)
         {
-            PatientsDemographics patientsdemographics = new PatientsDemographics(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Patient Demographics Form", conn);
+            PatientsDemographics patientsdemographics = new PatientsDemographics(conn, cbIndex, loginID);
             Hide();
             patientsdemographics.ShowDialog();
             Close();
@@ -331,7 +351,8 @@ namespace FinalProject
 
         private void naviGenMed_Click(object sender, EventArgs e)
         {
-            GeneralMedical generalMedical = new GeneralMedical(conn, cbIndex);
+            Functions.Logging(loginID, "Move To General Medical History Form", conn);
+            GeneralMedical generalMedical = new GeneralMedical(conn, cbIndex, loginID);
             Functions.EnableReadOnly(generalMedical);
             Hide();
             generalMedical.ShowDialog();
@@ -340,24 +361,11 @@ namespace FinalProject
 
         private void naviAllergyHis_Click(object sender, EventArgs e)
         {
-            AllergyHistory allergyHistory = new AllergyHistory(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Allergy History Form", conn);
+            AllergyHistory allergyHistory = new AllergyHistory(conn, cbIndex, loginID);
             Hide();
             allergyHistory.ShowDialog();
             Close();
-        }
-
-        private void naviFamilyHis_Click(object sender, EventArgs e)
-        {
-            Family_History familyHistory = new Family_History(conn, cbIndex);
-            Functions.EnableReadOnly(familyHistory);
-            Hide();
-            familyHistory.ShowDialog();
-            Close();
-        }
-
-        private void patientListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

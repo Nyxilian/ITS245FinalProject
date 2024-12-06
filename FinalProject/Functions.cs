@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -156,6 +157,41 @@ namespace FinalProject
                 timer.Dispose();
             };
             timer.Start();
+        }
+
+        public static void Logging (int loginID, string log, MySqlConnection conn)
+        {
+            string directory = "C:\\Patient Reports";
+            string f = "log.txt";
+            string fullPath = directory + "\\" + f;
+
+            string user = "";
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"SELECT UserName FROM login WHERE LoginID = {loginID}", conn);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    user = result.ToString();
+                }
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error with bringing LoginID: " + ex.Message);
+            }
+
+            if(!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            if(!File.Exists(fullPath))
+            {
+                File.Create(fullPath).Close();
+            }
+
+            File.AppendAllText(fullPath, "[" + DateTime.Now + "] " + user + ": " + log + Environment.NewLine);
         }
     }
 }

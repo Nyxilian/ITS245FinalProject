@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace FinalProject
@@ -14,6 +15,7 @@ namespace FinalProject
         private MySqlConnection conn;
         int cbIndex;
         int PID;
+        private int loginID;
 
         int mode = 2;
 
@@ -22,11 +24,12 @@ namespace FinalProject
             InitializeComponent();
         }
 
-        public GeneralMedical(MySqlConnection conn, int cbIndex)
+        public GeneralMedical(MySqlConnection conn, int cbIndex, int loginID)
         {
             InitializeComponent();
             this.conn = conn;
             this.cbIndex = cbIndex;
+            this.loginID = loginID;
         }
 
         private void GeneralMedical_Load(object sender, EventArgs e)
@@ -48,12 +51,11 @@ namespace FinalProject
             PID = Functions.patients[patientListBox.SelectedIndex].PID;
 
             getGenMedHis();
+            Functions.Logging(loginID, $"Open the general medical history record; PID: {PID}", conn);
         }
 
         public void getGenMedHis()
         {
-            MessageBox.Show($"{PID}");
-
             try
             {
                 using (MySqlCommand command = new MySqlCommand("GetGMH", conn))
@@ -145,6 +147,7 @@ namespace FinalProject
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to bring data; PID: {PID}", conn);
                 MessageBox.Show($"Could Not Obtain Data From Database. Error: {ex.Message}");
             }
         }
@@ -167,6 +170,7 @@ namespace FinalProject
             MessageBox.Show("You have entered Add mode. When adding a new entry, please ensure that all boxes have been filled.");
             addBtn.Enabled = false;
             addBtn.BackColor = System.Drawing.Color.Orange;
+            Functions.Logging(loginID, "Try to add a new data into the General Medical History table", conn);
         }
 
         //Code for the modify button, which will set the mode to 1
@@ -185,6 +189,7 @@ namespace FinalProject
             MessageBox.Show("You have entered Modify mode.");
             modBtn.Enabled = false;
             modBtn.BackColor = Color.Orange;
+            Functions.Logging(loginID, "Try to modify data of the General Medical History table", conn);
         }
 
         //Code for the save button, which will execute the stored procedures
@@ -272,6 +277,7 @@ namespace FinalProject
                     }
                     catch (Exception ex)
                     {
+                        Functions.Logging(loginID, "Failed to update the General Medical History table", conn);
                         MessageBox.Show($"ERROR ADDING DATA TO DATABASE.\n{ex.Message}");
                     }
                 }
@@ -329,14 +335,17 @@ namespace FinalProject
                     }
                     catch (Exception ex)
                     {
+                        Functions.Logging(loginID, "Failed to update the General Medical History table", conn);
                         MessageBox.Show($"ERROR UPDATING DATABASE\nERROR: {ex.Message}");
                     }
                 }
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, "Failed to update the General Medical History table", conn);
                 MessageBox.Show($"ERROR EXECUTING STORED PROCEDURES!\n{ex.Message}");
             }
+            Functions.Logging(loginID, $"Update the General Medical History table; GMHID: {genMedIDTxt.Text}", conn);
         }
 
         //Code for the undo button which will reset the text in the textboxes
@@ -344,6 +353,7 @@ namespace FinalProject
         {
             Functions.ColorClick(undoBtn, Color.Orange);
             getGenMedHis();
+            Functions.Logging(loginID, "Undo the changes", conn);
         }
 
         //Code for the delete button, which will set the deleted value of the currently viewed patient to 1/true
@@ -367,9 +377,11 @@ namespace FinalProject
                     if (result > 0)
                     {
                         MessageBox.Show($"Patient {oldPID} with General Medical History ID {oldGmhID} has had their General Medical History record deleted.");
+                        Functions.Logging(loginID, $"Delete in the General Medical History table; GMHID: {oldGmhID}", conn);
                     }
                     else
                     {
+                        Functions.Logging(loginID, $"Failed to delete in the General Medical History table; GMHID: {oldGmhID}", conn);
                         MessageBox.Show("Unable to delete record.");
                     }
 
@@ -378,6 +390,7 @@ namespace FinalProject
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to delete in the General Medical History table; GMHID: {genMedIDTxt.Text}", conn);
                 MessageBox.Show($"ERROR DELETING DATA FROM DATABASE.\nERROR: {ex.Message}");
             }
         }
@@ -385,6 +398,7 @@ namespace FinalProject
         //Navigation Methods. These will be copy/pasted to all forms so the user can move between them. 
         private void naviLogin_Click(object sender, EventArgs e)
         {
+            Functions.Logging(loginID, "Move To Login Form", conn);
             Login loginForm = new Login(conn);
             Hide();
             loginForm.ShowDialog();
@@ -393,7 +407,8 @@ namespace FinalProject
 
         private void naviSelectPatient_Click(object sender, EventArgs e)
         {
-            SelectPatient selectPatientForm = new SelectPatient(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Select Patient Form", conn);
+            SelectPatient selectPatientForm = new SelectPatient(conn, cbIndex, loginID);
             Hide();
             selectPatientForm.ShowDialog();
             Close();
@@ -401,35 +416,29 @@ namespace FinalProject
 
         private void naviPatientDemo_Click(object sender, EventArgs e)
         {
-            PatientsDemographics patientDemographicsForm = new PatientsDemographics(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Patient Demographics Form", conn);
+            PatientsDemographics patientDemographicsForm = new PatientsDemographics(conn, cbIndex, loginID);
             Hide();
             patientDemographicsForm.ShowDialog();
             Close();
         }
 
-        private void naviGenMed_Click(object sender, EventArgs e)
-        {
-            GeneralMedical generalMedicalForm = new GeneralMedical(conn, cbIndex);
-            Functions.EnableReadOnly(generalMedicalForm);
-            Hide();
-            generalMedicalForm.Show();
-            Close();
-        }
-
         private void naviAllergyHis_Click(object sender, EventArgs e)
         {
-            AllergyHistory allergyHistoryForm = new AllergyHistory(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Allergy History Form", conn);
+            AllergyHistory allergyHistoryForm = new AllergyHistory(conn, cbIndex, loginID);
             Hide();
-            allergyHistoryForm.Show();
+            allergyHistoryForm.ShowDialog();
             Close();
         }
 
         private void naviFamilyHis_Click(object sender, EventArgs e)
         {
-            Family_History familyHistoryForm = new Family_History(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Family History Form", conn);
+            Family_History familyHistoryForm = new Family_History(conn, cbIndex, loginID);
             Functions.EnableReadOnly(familyHistoryForm);
             Hide();
-            familyHistoryForm.Show();
+            familyHistoryForm.ShowDialog();
             Close();
         }
     }

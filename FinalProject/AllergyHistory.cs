@@ -17,6 +17,7 @@ namespace FinalProject
     {
         private MySqlConnection conn;
         private int cbIndex;
+        private int loginID;
         DataTable dt = new DataTable();
 
         // View 0, Add 1, Modify 2
@@ -116,6 +117,7 @@ namespace FinalProject
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to bring data; PID: {pid}", conn);
                 MessageBox.Show("Error with updating DGV: " + ex.Message);
             }
         }
@@ -144,16 +146,18 @@ namespace FinalProject
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to bring data; AID: {aid}", conn);
                 MessageBox.Show("Error with updating textboxes: " + ex.Message);
             }
 
         }
 
-        public AllergyHistory(MySqlConnection conn, int cbIndex)
+        public AllergyHistory(MySqlConnection conn, int cbIndex, int loginID)
         {
             InitializeComponent();
             this.conn = conn;
             this.cbIndex = cbIndex;
+            this.loginID = loginID;
         }
 
         private void AllergyHistory_Load(object sender, EventArgs e)
@@ -173,6 +177,7 @@ namespace FinalProject
             {
                 ModeChange(0);
             }
+            Functions.Logging(loginID, $"Open the Allergy History record; PID: {Functions.patients[cbIndex].PID}", conn);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -185,11 +190,13 @@ namespace FinalProject
                     ModeChange(0);
                 }
             }
+            Functions.Logging(loginID, $"Open the Allergy History record; AID: {dt.Rows[e.RowIndex][0].ToString()}", conn);
         }
 
         // Navigation
         private void btnToLogin_Click(object sender, EventArgs e)
         {
+            Functions.Logging(loginID, "Move To Login Form", conn);
             Login l = new Login(conn);
             Hide();
             l.ShowDialog();
@@ -198,7 +205,8 @@ namespace FinalProject
 
         private void btnToSelectPatient_Click(object sender, EventArgs e)
         {
-            SelectPatient sp = new SelectPatient(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Select Patient Form", conn);
+            SelectPatient sp = new SelectPatient(conn, cbIndex, loginID);
             Hide();
             sp.ShowDialog();
             Close();
@@ -206,7 +214,8 @@ namespace FinalProject
 
         private void btnToPatientDemo_Click(object sender, EventArgs e)
         {
-            PatientsDemographics pd = new PatientsDemographics(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Patient Demographics Form", conn);
+            PatientsDemographics pd = new PatientsDemographics(conn, cbIndex, loginID);
             Hide();
             pd.ShowDialog();
             Close();
@@ -214,7 +223,8 @@ namespace FinalProject
 
         private void btnToGenMedHis_Click(object sender, EventArgs e)
         {
-            GeneralMedical gm = new GeneralMedical(conn, cbIndex);
+            Functions.Logging(loginID, "Move To General Medical History Form", conn);
+            GeneralMedical gm = new GeneralMedical(conn, cbIndex, loginID);
             Functions.EnableReadOnly(gm);
             Hide();
             gm.ShowDialog();
@@ -223,7 +233,8 @@ namespace FinalProject
 
         private void btnToFamilyHistory_Click(object sender, EventArgs e)
         {
-            Family_History fh = new Family_History(conn, cbIndex);
+            Functions.Logging(loginID, "Move To Family History Form", conn);
+            Family_History fh = new Family_History(conn, cbIndex, loginID);
             Functions.EnableReadOnly(fh);
             Hide();
             fh.ShowDialog();
@@ -251,9 +262,11 @@ namespace FinalProject
                     tbAllergyID.Text = (Convert.ToInt16(result.ToString()) + 1).ToString();
                 }
                 cmd.Dispose();
+                Functions.Logging(loginID, "Try to add a new data into the Allergy History table", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, "Failed to add a new data into the Allergy History table", conn);
                 MessageBox.Show("Error with bringing Max(AllergyID): " + ex.Message);
             }
             tbAllergyID.Enabled = false;
@@ -268,6 +281,7 @@ namespace FinalProject
             cbPatient.SelectedIndex = cbIndex;
             tbEnable(true);
             ModeChange(2);
+            Functions.Logging(loginID, "Try to modify a new data into the Allergy History table", conn);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -276,11 +290,13 @@ namespace FinalProject
 
             if (!Functions.IsValidDate(tbStartDate.Text))
             {
+                Functions.Logging(loginID, "Failed to update the Allergy History table", conn);
                 MessageBox.Show("Check the AllergyStartDate input format | YYYY-MM-DD");
                 return;
             }
             if (!Functions.IsValidDate(tbEndDate.Text))
             {
+                Functions.Logging(loginID, "Failed to update the Allergy History table", conn);
                 MessageBox.Show("Check the AllergyEndDate input format | YYYY-MM-DD");
                 return;
             }
@@ -321,9 +337,11 @@ namespace FinalProject
 
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                Functions.Logging(loginID, $"Update the Allergy History table; AID : {tbAllergyID.Text}", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, "Failed to update the Allergy History table", conn);
                 MessageBox.Show("Error with executing query: " + ex.Message);
                 return;
             }
@@ -340,6 +358,7 @@ namespace FinalProject
             tbClear();
             tbEnable(false);
             ModeChange(0);
+            Functions.Logging(loginID, "Undo the changes", conn);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -351,9 +370,11 @@ namespace FinalProject
                 cmd.Parameters.AddWithValue("aid", tbAllergyID.Text);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                Functions.Logging(loginID, $"Delete in the Allergy History table; AID: {tbAllergyID.Text}", conn);
             }
             catch (Exception ex)
             {
+                Functions.Logging(loginID, $"Failed to delete in the Allergy History table; AID: {tbAllergyID.Text}", conn);
                 MessageBox.Show("Error with deleting data: " + ex.Message);
             }
             UpdateCB();
