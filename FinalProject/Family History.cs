@@ -48,13 +48,13 @@ namespace FinalProject
             patientListBox.SelectedIndex = cbIndex;
 
             //Populate DataGridView
-            PopulateShowFH();
+            PopulateShowFH(Functions.patients[cbIndex].PID);
         }
 
-        private void PopulateShowFH()
+        private void PopulateShowFH(int pid)
         {
             //Initialize datagridview. Hide all columns that aren't FamilyID, Relation, and Major Disorder
-            string sqlQuery = "SELECT * FROM familyhistory";
+            string sqlQuery = $"SELECT * FROM familyhistory WHERE PatientID = {pid}";
 
             try
             {
@@ -73,6 +73,12 @@ namespace FinalProject
                     column.Visible = false;
                 }
             }
+        }
+
+        private void patientListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbIndex = patientListBox.SelectedIndex;
+            PopulateShowFH(Functions.patients[cbIndex].PID);
         }
 
         private void showFH_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -190,7 +196,7 @@ namespace FinalProject
                         addBtn.Enabled = true;
                         addBtn.BackColor = System.Drawing.Color.White;
 
-                        PopulateShowFH();
+                        PopulateShowFH(Functions.patients[0].PID);
 
                         return;
                     }
@@ -255,7 +261,7 @@ namespace FinalProject
             modBtn.Enabled = true;
             modBtn.BackColor = System.Drawing.Color.White;
 
-            PopulateShowFH();
+            PopulateShowFH(Functions.patients[0].PID);
 
             return;
         }
@@ -311,7 +317,7 @@ namespace FinalProject
                         Functions.Logging(loginID, $"Failed to delete in the Family History table; AID: {familyIDText.Text}", conn);
                     }
 
-                    PopulateShowFH();
+                    PopulateShowFH(Functions.patients[0].PID);
                 }
             }
             catch (Exception ex)
@@ -367,5 +373,7 @@ namespace FinalProject
             allergyHistory.ShowDialog();
             Close();
         }
+
+        
     }
 }

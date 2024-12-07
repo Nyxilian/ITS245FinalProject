@@ -338,6 +338,7 @@
             this.patientListBox.Name = "patientListBox";
             this.patientListBox.Size = new System.Drawing.Size(470, 39);
             this.patientListBox.TabIndex = 1;
+            this.patientListBox.SelectedIndexChanged += new System.EventHandler(this.patientListBox_SelectedIndexChanged);
             // 
             // label4
             // 
