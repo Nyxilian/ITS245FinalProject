@@ -27,7 +27,10 @@ namespace FinalProject
         // View 0, Add 1, Modify 2
         private int mode = 0;
 
-        private void ModeChange(int m) // bascially for controlling Action menu
+
+        // Modifying the properties of Action Menu buttons 
+        // Color and Enabled status of each buttons
+        private void ModeChange(int m) 
         {
             switch (m)
             {
@@ -71,7 +74,8 @@ namespace FinalProject
         }
         
         
-
+        // Enable textBox status depends on the variable b
+        // Color control included
         private void tbEnable(bool b)
         {
             foreach (Control control in panel4.Controls)
@@ -91,6 +95,8 @@ namespace FinalProject
             }
         }
 
+        // Retrieving new data from the DB
+        // Save them into patients list as well as the comboBox
         private void UpdateCB()
         {
             cbPatient.Items.Clear();
@@ -101,6 +107,7 @@ namespace FinalProject
             }
         }
 
+        // Update textBoxes with the data of the corresponding pid input
         private void UpdateTB(int pid)
         {
             try
@@ -216,13 +223,21 @@ namespace FinalProject
             ModeChange(0);
         }
 
+        // Set cbIndex when a change happens
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
+            // An exception handling during the Add mode
+            // A new cell made by the Add mode will be shown as an empty item in the comboBox
             if (!string.IsNullOrEmpty(cbPatient.Items[cbIndex].ToString()))
             {
                 UpdateTB(Functions.patients[cbIndex].PID);
                 Functions.Logging(loginID, $"Open the Patient Demographics record; PID: {Functions.patients[cbIndex].PID}", conn);
+            }
+            // If the user selected other comboBox items, return to View Mode
+            if (mode != 0)
+            {
+                ModeChange(0);
             }
         }
 
@@ -282,7 +297,8 @@ namespace FinalProject
             cbIndexCopy = cbIndex;
             UpdateCB();
             cbPatient.Items.Add("");
-            cbPatient.SelectedIndex = cbPatient.Items.Count - 1;
+            cbPatient.SelectedIndex = cbPatient.Items.Count - 1; // Forcely select the lastest item
+            // Empty the inside of textBoxes
             foreach (Control control in panel4.Controls)
             {
                 if (control is TextBox)
@@ -290,8 +306,10 @@ namespace FinalProject
                     control.Text = "";
                 }
             }
-            tbEnable(true);
+            tbEnable(true); // Enable textboexes for the user to add values in them
 
+            // Try to bring the next number of the last PID
+            // Put into PatientID textBox and disable it
             try
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT MAX(PatientID) FROM patientdemographics;", conn);
@@ -359,6 +377,7 @@ namespace FinalProject
                 
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                // Used same parameters in SPs to compress the code
                 // Add parameters to the command object
                 cmd.Parameters.AddWithValue("p_PatientID", tbPatientID.Text);
                 cmd.Parameters.AddWithValue("p_HospitalMR", tbHospitalMR.Text);
@@ -431,6 +450,7 @@ namespace FinalProject
             
         }
 
+        // Ignore all changes and return to the initial state of the Form
         private void btnUndo_Click(object sender, EventArgs e)
         {
             cbPatient.Items.Clear();
@@ -446,6 +466,7 @@ namespace FinalProject
             Functions.Logging(loginID, "Undo the changes", conn);
         }
 
+        // Only mark the current item/data deleted = 1
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try

@@ -24,7 +24,7 @@ namespace FinalProject
         private int loginID;
         private MySqlConnection conn;
 
-        public SelectPatient()
+        public SelectPatient() // only for test
         {
             InitializeComponent();
             conn = Functions.ConnectDB();
@@ -41,14 +41,15 @@ namespace FinalProject
 
         private void SelectPatient_Load(object sender, EventArgs e)
         {
-            Functions.InitPatientList(conn);
+            Functions.InitPatientList(conn); 
             foreach (Patient p in Functions.patients)
             {
                 cbPatient.Items.Add(p.Info_Combo());
             }
-            cbPatient.SelectedIndex = cbIndex;
+            cbPatient.SelectedIndex = cbIndex; // Update ComboBox and
         }
 
+        // Update TextBoxes when the user changes the comboBox selection
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
@@ -114,25 +115,29 @@ namespace FinalProject
                 p = Functions.patients[i];
                 try
                 {
-                    if (p.PLastName.ToLower().Equals(target))
+                    if (p.PLastName.ToLower().Equals(target)) // Find the patient with Name
                     {
                         cbPatient.SelectedIndex = i;
                         Functions.Logging(loginID, $"Search a patient: {target}; Succeed", conn);
                         return;
                     }
-                    if (p.PID == Convert.ToInt32(target))
+                    if (p.PID == Convert.ToInt32(target)) // Find the patient with PID
                     {
                         cbPatient.SelectedIndex = i;
                         Functions.Logging(loginID, $"Search a patient: {target}; Succeed", conn);
                         return;
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             Functions.Logging(loginID, $"Search a patient: {target}; Fail", conn);
             MessageBox.Show("No data found with the corresponding input.");
         }
 
+        // bring new data from the DB and update into patients List and the comboBox
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             cbPatient.Items.Clear();

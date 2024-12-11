@@ -23,7 +23,9 @@ namespace FinalProject
         // View 0, Add 1, Modify 2
         private int mode = 0;
 
-        private void ModeChange(int m) // bascially for controlling Action menu
+        // Modifying the properties of Action Menu buttons 
+        // Color and Enabled status of each buttons
+        private void ModeChange(int m)
         {
             switch (m)
             {
@@ -66,6 +68,8 @@ namespace FinalProject
             mode = m;
         }
 
+        // Enable textBox status depends on the variable b
+        // Color control included
         private void tbEnable(bool b)
         {
             foreach (Control control in panel4.Controls)
@@ -85,6 +89,7 @@ namespace FinalProject
             }
         }
 
+        // Clear the textBoxes 
         private void tbClear()
         {
             foreach (Control control in panel4.Controls)
@@ -96,6 +101,8 @@ namespace FinalProject
             }
         }
 
+        // Retrieving new data from the DB
+        // Save them into patients list as well as the comboBox
         private void UpdateCB()
         {
             cbPatient.Items.Clear();
@@ -106,6 +113,7 @@ namespace FinalProject
             }
         }
 
+        // Update the DataGridView with the corresponding data of PID
         private void UpdateDGV(int pid)
         {
             try
@@ -122,6 +130,7 @@ namespace FinalProject
             }
         }
 
+        // Update the TextBoxes with the corresponding data of AllergyID
         private void UpdateTB(int aid)
         {
             try
@@ -168,6 +177,7 @@ namespace FinalProject
             ModeChange(0);
         }
 
+        // The DataGridView will be updated when the user changes the selection of the comboBox
         private void cbPatient_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbIndex = cbPatient.SelectedIndex;
@@ -180,6 +190,7 @@ namespace FinalProject
             Functions.Logging(loginID, $"Open the Allergy History record; PID: {Functions.patients[cbIndex].PID}", conn);
         }
 
+        // Update the Textboxes when the user clicks any cells in the DataGridView
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex < dt.Rows.Count)
@@ -244,15 +255,11 @@ namespace FinalProject
         // Action Menu
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            foreach (Control control in panel4.Controls)
-            {
-                if (control is TextBox)
-                {
-                    control.Text = "";
-                }
-            }
+            tbClear();
             tbEnable(true);
 
+            // Try to get the next number of the last AID
+            // Put it into the AID textbox and disable it
             try
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT MAX(AllergyID) FROM allergyhistory;", conn);
@@ -288,6 +295,7 @@ namespace FinalProject
         {
             MySqlCommand cmd = null;
 
+            // Check the date inputs
             if (!Functions.IsValidDate(tbStartDate.Text))
             {
                 Functions.Logging(loginID, "Failed to update the Allergy History table", conn);
@@ -352,6 +360,7 @@ namespace FinalProject
             ModeChange(0);
         }
 
+        // Return to the initial state of the Form
         private void btnUndo_Click(object sender, EventArgs e)
         {
             UpdateDGV(Functions.patients[cbIndex].PID);
@@ -361,6 +370,7 @@ namespace FinalProject
             Functions.Logging(loginID, "Undo the changes", conn);
         }
 
+        // Set deleted = 1 for the corresponding AID
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
