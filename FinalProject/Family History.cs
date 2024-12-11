@@ -77,6 +77,7 @@ namespace FinalProject
 
         private void patientListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //set cbIndex the index of the new selected patient so that patients information is dispalyed in the textboxes. 
             cbIndex = patientListBox.SelectedIndex;
             PopulateShowFH(Functions.patients[cbIndex].PID);
         }
@@ -109,7 +110,7 @@ namespace FinalProject
             Functions.Logging(loginID, $"Open the Family History record; FID: {familyID}", conn);
         }
 
-        //Enter Add mode. This will change the mode variable's value to 0, disable read only mode, and display a tutorial messagebox to the user
+        //Enter Add mode. This will change the mode variable's value to 0, disable read only mode, and display a tutorial messagebox to the user.
         private void addBtn_Click(object sender, EventArgs e)
         {
             if (mode == 1)
@@ -270,6 +271,8 @@ namespace FinalProject
         {
             Functions.ColorClick(undoBtn, Color.Orange);
 
+            //have an index mapped to the currently selected row in the datagridview.
+            //This allows the correct data to be brought back into the textboxes, undoing any changes the user made to the patient's information
             int i = showFH.CurrentRow.Index;
 
             string familyID = showFH.Rows[i].Cells["FamilyID"].Value.ToString();
@@ -327,7 +330,7 @@ namespace FinalProject
             }
         }
 
-        // Navigation functions to allow user to change forms. The form objects have parameters that pass the current patient index and the SQL connection to the next form. 
+        // Navigation functions to allow user to change forms. The form objects have parameters that pass the current patient index, loginID, and SQL connection to the next form. 
         private void naviLogin_Click(object sender, EventArgs e)
         {
             Functions.Logging(loginID, "Move To Login Form", conn);

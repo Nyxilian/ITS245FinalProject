@@ -12,11 +12,14 @@ namespace FinalProject
 {
     public partial class GeneralMedical : Form
     {
+        //initiate connection variable, combobox patient variable, patient ID variable, and the patients login ID variable. 
         private MySqlConnection conn;
         int cbIndex;
         int PID;
         private int loginID;
 
+        //initialize mode variable as 2, just to give it a place holder value. Will later be set to 1 or 0 by 
+        //Add or Modify buttons.
         int mode = 2;
 
         public GeneralMedical()
@@ -24,6 +27,7 @@ namespace FinalProject
             InitializeComponent();
         }
 
+        //Constructor that recieves the mysql connection, current combox index, and login ID.
         public GeneralMedical(MySqlConnection conn, int cbIndex, int loginID)
         {
             InitializeComponent();
@@ -46,6 +50,7 @@ namespace FinalProject
             PID = Functions.patients[cbIndex].PID;
         }
 
+        //update patient information when selected patient is changed
         private void patientListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PID = Functions.patients[patientListBox.SelectedIndex].PID;
@@ -54,10 +59,12 @@ namespace FinalProject
             Functions.Logging(loginID, $"Open the general medical history record; PID: {PID}", conn);
         }
 
+        //retrieve patient information for user
         public void getGenMedHis()
         {
             try
             {
+                //use a stored procedure to get all values from all columns in table, put those values in fields, and then display those field values in textboxes for the user to see and interact with. 
                 using (MySqlCommand command = new MySqlCommand("GetGMH", conn))
                 {
                     command.CommandType = CommandType.StoredProcedure;
@@ -224,6 +231,7 @@ namespace FinalProject
 
             try
             {
+                //check if mode is 0. if it was, then the user was in add mode and the insert stored procedure should be ran. 
                 if (mode == 0)
                 {
                     try
@@ -281,7 +289,8 @@ namespace FinalProject
                         MessageBox.Show($"ERROR ADDING DATA TO DATABASE.\n{ex.Message}");
                     }
                 }
-
+                
+                //check if mode is set to 1. If it was, then the user was in modify mode and a update stored procedure should be ran.  
                 if (mode == 1)
                 {
                     try
@@ -396,6 +405,7 @@ namespace FinalProject
         }
 
         //Navigation Methods. These will be copy/pasted to all forms so the user can move between them. 
+        //have conn and cbIndex be constructor arguements for each new form created so the forms are created with these arguments passed into them.
         private void naviLogin_Click(object sender, EventArgs e)
         {
             Functions.Logging(loginID, "Move To Login Form", conn);

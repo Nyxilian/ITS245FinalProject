@@ -150,25 +150,30 @@ namespace FinalProject
             Functions.Logging(loginID, $"Update Patient List", conn);
         }
 
+        //Create a comprehensive report of the currently selected patient's information.
         private void PatientReportBtn_Click(object sender, EventArgs e)
         {
             int PID = Functions.patients[cbIndex].PID;
+            //set up folder and file pathing
             string folderDirectory = "C:\\Patient Reports";
             string fileName = $"Patient PID [{PID}] - {Functions.patients[cbIndex].PFirstName.ToString()} {Functions.patients[cbIndex].PLastName.ToString()}.txt";
             string fullPath = Path.Combine(folderDirectory, fileName);
 
             try
             {
+                //check if directory doesn't exist. If it does, do nothing. If it doesn't, create a directory.
                 if (!Directory.Exists(folderDirectory))
                 {
                     Directory.CreateDirectory(folderDirectory);
                 }
 
+                //check if a file matching fullpath exists. If it does, delete fullpath so new ver of fullpath can be made. 
                 if (File.Exists(fullPath))
                 {
                     File.Delete(fullPath);
                 }
 
+                //create patient report file and open it for writing.
                 FileStream file = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
                 StreamWriter writer = new StreamWriter(file);
 
@@ -176,20 +181,25 @@ namespace FinalProject
                 writer.WriteLine("\n");
                 writer.WriteLine("Patient Demographics: ");
 
+                //query patient demographics table for all columns that correspond to the current patients ID
                 string getPatientDemo = $"SELECT * FROM patientdemographics WHERE PatientID = {PID}";
                 using (MySqlCommand cmd = new MySqlCommand(getPatientDemo, conn))
                 {
+                    //use data reader to read the singular row returned by the query
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
+                                //write data read by the reader to the file
                                 writer.WriteLine($"{reader.GetName(i)}:  {reader[i]}");
                             }
                         }
                     }
                 }
+
+                //repeat above process for all tables in database...
 
                 writer.WriteLine("\n");
                 writer.WriteLine("General MedicalHistory: ");
@@ -245,9 +255,12 @@ namespace FinalProject
                     }
                 }
 
+                //close all file IO functions
                 writer.Flush();
                 writer.Close();
                 file.Close();
+
+                //log user activity
                 Functions.Logging(loginID, $"Make a report of a patient; PID: {PID}", conn);
             }
             catch (Exception ex)
@@ -258,25 +271,3 @@ namespace FinalProject
         }
     }
 }
-
-//string getFamily = $"SELECT * FROM familyhistory WHERE PatientID = {PID}";
-//string getGMH = $"SELECT * FROM  generalmedicalhistory WHERE PatientID = {PID}";
-//string getAllergy = $"SELECT * FROM allergyhistory WHERE PatientID = {PID}";
-//string getPatientDemo = $"SELECT * FROM patientdemographics WHERE PatientID = {PID}";
-
-////MySqlCommand cmdPatientDemo = new MySqlCommand(getPatientDemo, conn);
-////MySqlCommand cmdGMH = new MySqlCommand(getGMH, conn);
-////MySqlCommand cmdAllergy = new MySqlCommand(getAllergy, conn);
-////MySqlCommand cmdFamily = new MySqlCommand(getFamily, conn);
-
-////MySqlDataReader cmdPatientDemoReader = cmdPatientDemo.ExecuteReader();
-////MySqlDataReader cmdGMHReader = cmdGMH.ExecuteReader();
-////MySqlDataReader cmdAllergyReader = cmdAllergy.ExecuteReader();
-////MySqlDataReader cmdFamilyReader = cmdFamily.ExecuteReader();
-
-//writer.WriteLine($"Patient Name: {Functions.patients[cbIndex].PFirstName.ToString()} {Functions.patients[cbIndex].PLastName.ToString()}. Patient ID: {PID}. ");
-
-////cmdPatientDemoReader.Close();
-////cmdGMHReader.Close();
-////cmdAllergyReader.Close();
-////cmdFamilyReader.Close();
