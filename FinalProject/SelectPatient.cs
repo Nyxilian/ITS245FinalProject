@@ -115,7 +115,7 @@ namespace FinalProject
                 p = Functions.patients[i];
                 try
                 {
-                    if (p.PLastName.ToLower().Equals(target)) // Find the patient with Name
+                    if (p.PLastName.ToLower().Equals(target)) // Find the patient with LastName
                     {
                         cbPatient.SelectedIndex = i;
                         Functions.Logging(loginID, $"Search a patient: {target}; Succeed", conn);
